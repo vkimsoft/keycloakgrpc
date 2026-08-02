@@ -1,4 +1,4 @@
-module github.com/vkimsoft/keycloakgrpc/protos
+module github.com/vkimsoft/keycloakgrpc
 
 go 1.26.5
 
