@@ -28,7 +28,7 @@ const (
 //	}
 type IsAdminRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // User ID to validate.
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // User ID to validate.
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -63,11 +63,11 @@ func (*IsAdminRequest) Descriptor() ([]byte, []int) {
 	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *IsAdminRequest) GetUserId() int64 {
+func (x *IsAdminRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return ""
 }
 
 type IsAdminResponse struct {
@@ -581,7 +581,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\n" +
 	"\x17keycloak/keycloak.proto\x12\x04auth\")\n" +
 	"\x0eIsAdminRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\",\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\",\n" +
 	"\x0fIsAdminResponse\x12\x19\n" +
 	"\bis_admin\x18\x01 \x01(\bR\aisAdmin\"C\n" +
 	"\x0fRegisterRequest\x12\x14\n" +

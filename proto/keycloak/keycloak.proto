@@ -23,7 +23,7 @@ service Auth {
 // 		string realmName =3;
 // }
 message IsAdminRequest {
-  int64 user_id = 1; // User ID to validate.
+  string user_id = 1; // User ID to validate.
 }
 message IsAdminResponse {
   bool is_admin = 1;  // Indicates whether the user is an admin.
