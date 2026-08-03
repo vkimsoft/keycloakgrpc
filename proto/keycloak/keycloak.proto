@@ -9,7 +9,7 @@ service Auth {
 	rpc ClientConnect(SetConnectRequest) returns (ServerResponse);
 	rpc GetClient(LoginRequest) returns (ServerResponse);
 	// Register registers a new user.
-  rpc Register (RegisterRequest) returns (RegisterResponse);
+  //rpc Register (RegisterRequest) returns (RegisterResponse);
   // Login logs in a user and returns an auth token.
   rpc Login (LoginRequest) returns (LoginResponse);
   // IsAdmin checks whether a user is an admin.
@@ -28,7 +28,7 @@ message IsAdminRequest {
 message IsAdminResponse {
   bool is_admin = 1;  // Indicates whether the user is an admin.
 }
-
+/*
 message RegisterRequest {
   string email = 1; // Email of the user to register.
   string password = 2; // Password of the user to register.
@@ -36,7 +36,7 @@ message RegisterRequest {
 message RegisterResponse {
   string user_id = 1; // User ID of the registered user.
 }
-
+*/
 message LoginRequest {
 	string user = 1;
   string email = 2; // Email of the user to login.

@@ -114,102 +114,13 @@ func (x *IsAdminResponse) GetIsAdmin() bool {
 	return false
 }
 
-type RegisterRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`       // Email of the user to register.
-	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"` // Password of the user to register.
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegisterRequest) Reset() {
-	*x = RegisterRequest{}
-	mi := &file_keycloak_keycloak_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegisterRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegisterRequest) ProtoMessage() {}
-
-func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_keycloak_keycloak_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
-func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *RegisterRequest) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *RegisterRequest) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-type RegisterResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // User ID of the registered user.
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegisterResponse) Reset() {
-	*x = RegisterResponse{}
-	mi := &file_keycloak_keycloak_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegisterResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegisterResponse) ProtoMessage() {}
-
-func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_keycloak_keycloak_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
-func (*RegisterResponse) Descriptor() ([]byte, []int) {
-	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *RegisterResponse) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
+// message RegisterRequest {
+// string email = 1; // Email of the user to register.
+// string password = 2; // Password of the user to register.
+// }
+// message RegisterResponse {
+// string user_id = 1; // User ID of the registered user.
+// }
 type LoginRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	User          string                 `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
@@ -222,7 +133,7 @@ type LoginRequest struct {
 
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
-	mi := &file_keycloak_keycloak_proto_msgTypes[4]
+	mi := &file_keycloak_keycloak_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +145,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_keycloak_keycloak_proto_msgTypes[4]
+	mi := &file_keycloak_keycloak_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +158,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{4}
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *LoginRequest) GetUser() string {
@@ -287,7 +198,7 @@ type LoginResponse struct {
 
 func (x *LoginResponse) Reset() {
 	*x = LoginResponse{}
-	mi := &file_keycloak_keycloak_proto_msgTypes[5]
+	mi := &file_keycloak_keycloak_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -299,7 +210,7 @@ func (x *LoginResponse) String() string {
 func (*LoginResponse) ProtoMessage() {}
 
 func (x *LoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_keycloak_keycloak_proto_msgTypes[5]
+	mi := &file_keycloak_keycloak_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -312,7 +223,7 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
 func (*LoginResponse) Descriptor() ([]byte, []int) {
-	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{5}
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *LoginResponse) GetToken() string {
@@ -331,7 +242,7 @@ type LogoutRequest struct {
 
 func (x *LogoutRequest) Reset() {
 	*x = LogoutRequest{}
-	mi := &file_keycloak_keycloak_proto_msgTypes[6]
+	mi := &file_keycloak_keycloak_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -343,7 +254,7 @@ func (x *LogoutRequest) String() string {
 func (*LogoutRequest) ProtoMessage() {}
 
 func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_keycloak_keycloak_proto_msgTypes[6]
+	mi := &file_keycloak_keycloak_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -356,7 +267,7 @@ func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogoutRequest.ProtoReflect.Descriptor instead.
 func (*LogoutRequest) Descriptor() ([]byte, []int) {
-	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{6}
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *LogoutRequest) GetToken() string {
@@ -375,7 +286,7 @@ type LogoutResponse struct {
 
 func (x *LogoutResponse) Reset() {
 	*x = LogoutResponse{}
-	mi := &file_keycloak_keycloak_proto_msgTypes[7]
+	mi := &file_keycloak_keycloak_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -387,7 +298,7 @@ func (x *LogoutResponse) String() string {
 func (*LogoutResponse) ProtoMessage() {}
 
 func (x *LogoutResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_keycloak_keycloak_proto_msgTypes[7]
+	mi := &file_keycloak_keycloak_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -400,7 +311,7 @@ func (x *LogoutResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogoutResponse.ProtoReflect.Descriptor instead.
 func (*LogoutResponse) Descriptor() ([]byte, []int) {
-	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{7}
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *LogoutResponse) GetSuccess() bool {
@@ -421,7 +332,7 @@ type SetConnectRequest struct {
 
 func (x *SetConnectRequest) Reset() {
 	*x = SetConnectRequest{}
-	mi := &file_keycloak_keycloak_proto_msgTypes[8]
+	mi := &file_keycloak_keycloak_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -433,7 +344,7 @@ func (x *SetConnectRequest) String() string {
 func (*SetConnectRequest) ProtoMessage() {}
 
 func (x *SetConnectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_keycloak_keycloak_proto_msgTypes[8]
+	mi := &file_keycloak_keycloak_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -446,7 +357,7 @@ func (x *SetConnectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetConnectRequest.ProtoReflect.Descriptor instead.
 func (*SetConnectRequest) Descriptor() ([]byte, []int) {
-	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{8}
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SetConnectRequest) GetClientID() string {
@@ -479,7 +390,7 @@ type GetRequest struct {
 
 func (x *GetRequest) Reset() {
 	*x = GetRequest{}
-	mi := &file_keycloak_keycloak_proto_msgTypes[9]
+	mi := &file_keycloak_keycloak_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -491,7 +402,7 @@ func (x *GetRequest) String() string {
 func (*GetRequest) ProtoMessage() {}
 
 func (x *GetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_keycloak_keycloak_proto_msgTypes[9]
+	mi := &file_keycloak_keycloak_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -504,7 +415,7 @@ func (x *GetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRequest.ProtoReflect.Descriptor instead.
 func (*GetRequest) Descriptor() ([]byte, []int) {
-	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{9}
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetRequest) GetKey() string {
@@ -526,7 +437,7 @@ type ServerResponse struct {
 
 func (x *ServerResponse) Reset() {
 	*x = ServerResponse{}
-	mi := &file_keycloak_keycloak_proto_msgTypes[10]
+	mi := &file_keycloak_keycloak_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -538,7 +449,7 @@ func (x *ServerResponse) String() string {
 func (*ServerResponse) ProtoMessage() {}
 
 func (x *ServerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_keycloak_keycloak_proto_msgTypes[10]
+	mi := &file_keycloak_keycloak_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -551,7 +462,7 @@ func (x *ServerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServerResponse.ProtoReflect.Descriptor instead.
 func (*ServerResponse) Descriptor() ([]byte, []int) {
-	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{10}
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ServerResponse) GetSuccess() bool {
@@ -583,12 +494,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x0eIsAdminRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\",\n" +
 	"\x0fIsAdminResponse\x12\x19\n" +
-	"\bis_admin\x18\x01 \x01(\bR\aisAdmin\"C\n" +
-	"\x0fRegisterRequest\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"+\n" +
-	"\x10RegisterResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"r\n" +
+	"\bis_admin\x18\x01 \x01(\bR\aisAdmin\"r\n" +
 	"\fLoginRequest\x12\x12\n" +
 	"\x04user\x18\x01 \x01(\tR\x04user\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
@@ -610,11 +516,10 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x0eServerResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error2\xd7\x02\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error2\x9c\x02\n" +
 	"\x04Auth\x12>\n" +
 	"\rClientConnect\x12\x17.auth.SetConnectRequest\x1a\x14.auth.ServerResponse\x125\n" +
-	"\tGetClient\x12\x12.auth.LoginRequest\x1a\x14.auth.ServerResponse\x129\n" +
-	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
+	"\tGetClient\x12\x12.auth.LoginRequest\x1a\x14.auth.ServerResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x126\n" +
 	"\aIsAdmin\x12\x14.auth.IsAdminRequest\x1a\x15.auth.IsAdminResponse\x123\n" +
 	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x14.auth.LogoutResponseBEZCgithub.com/vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
@@ -631,38 +536,34 @@ func file_keycloak_keycloak_proto_rawDescGZIP() []byte {
 	return file_keycloak_keycloak_proto_rawDescData
 }
 
-var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_keycloak_keycloak_proto_goTypes = []any{
 	(*IsAdminRequest)(nil),    // 0: auth.IsAdminRequest
 	(*IsAdminResponse)(nil),   // 1: auth.IsAdminResponse
-	(*RegisterRequest)(nil),   // 2: auth.RegisterRequest
-	(*RegisterResponse)(nil),  // 3: auth.RegisterResponse
-	(*LoginRequest)(nil),      // 4: auth.LoginRequest
-	(*LoginResponse)(nil),     // 5: auth.LoginResponse
-	(*LogoutRequest)(nil),     // 6: auth.LogoutRequest
-	(*LogoutResponse)(nil),    // 7: auth.LogoutResponse
-	(*SetConnectRequest)(nil), // 8: auth.SetConnectRequest
-	(*GetRequest)(nil),        // 9: auth.GetRequest
-	(*ServerResponse)(nil),    // 10: auth.ServerResponse
+	(*LoginRequest)(nil),      // 2: auth.LoginRequest
+	(*LoginResponse)(nil),     // 3: auth.LoginResponse
+	(*LogoutRequest)(nil),     // 4: auth.LogoutRequest
+	(*LogoutResponse)(nil),    // 5: auth.LogoutResponse
+	(*SetConnectRequest)(nil), // 6: auth.SetConnectRequest
+	(*GetRequest)(nil),        // 7: auth.GetRequest
+	(*ServerResponse)(nil),    // 8: auth.ServerResponse
 }
 var file_keycloak_keycloak_proto_depIdxs = []int32{
-	8,  // 0: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
-	4,  // 1: auth.Auth.GetClient:input_type -> auth.LoginRequest
-	2,  // 2: auth.Auth.Register:input_type -> auth.RegisterRequest
-	4,  // 3: auth.Auth.Login:input_type -> auth.LoginRequest
-	0,  // 4: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
-	6,  // 5: auth.Auth.Logout:input_type -> auth.LogoutRequest
-	10, // 6: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
-	10, // 7: auth.Auth.GetClient:output_type -> auth.ServerResponse
-	3,  // 8: auth.Auth.Register:output_type -> auth.RegisterResponse
-	5,  // 9: auth.Auth.Login:output_type -> auth.LoginResponse
-	1,  // 10: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
-	7,  // 11: auth.Auth.Logout:output_type -> auth.LogoutResponse
-	6,  // [6:12] is the sub-list for method output_type
-	0,  // [0:6] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	6, // 0: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
+	2, // 1: auth.Auth.GetClient:input_type -> auth.LoginRequest
+	2, // 2: auth.Auth.Login:input_type -> auth.LoginRequest
+	0, // 3: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
+	4, // 4: auth.Auth.Logout:input_type -> auth.LogoutRequest
+	8, // 5: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
+	8, // 6: auth.Auth.GetClient:output_type -> auth.ServerResponse
+	3, // 7: auth.Auth.Login:output_type -> auth.LoginResponse
+	1, // 8: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
+	5, // 9: auth.Auth.Logout:output_type -> auth.LogoutResponse
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_keycloak_keycloak_proto_init() }
@@ -676,7 +577,7 @@ func file_keycloak_keycloak_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_keycloak_keycloak_proto_rawDesc), len(file_keycloak_keycloak_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
