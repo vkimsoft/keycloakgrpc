@@ -192,15 +192,15 @@ func (x *LoginRequest) GetRealmName() string {
 type LoginResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// gocloak.JWT token=1;
-	AccessToken      string `protobuf:"bytes,1,opt,name=AccessToken,proto3" json:"AccessToken,omitempty"`
-	IDToken          string `protobuf:"bytes,2,opt,name=IDToken,proto3" json:"IDToken,omitempty"`
-	ExpiresIn        int64  `protobuf:"varint,3,opt,name=ExpiresIn,proto3" json:"ExpiresIn,omitempty"`
-	RefreshExpiresIn int64  `protobuf:"varint,4,opt,name=RefreshExpiresIn,proto3" json:"RefreshExpiresIn,omitempty"`
-	RefreshToken     string `protobuf:"bytes,5,opt,name=RefreshToken,proto3" json:"RefreshToken,omitempty"`
-	TokenType        string `protobuf:"bytes,6,opt,name=TokenType,proto3" json:"TokenType,omitempty"`
-	NotBeforePolicy  int32  `protobuf:"varint,7,opt,name=NotBeforePolicy,proto3" json:"NotBeforePolicy,omitempty"`
-	SessionState     string `protobuf:"bytes,8,opt,name=SessionState,proto3" json:"SessionState,omitempty"`
-	Scope            string `protobuf:"bytes,9,opt,name=Scope,proto3" json:"Scope,omitempty"` //string token = 1; // Auth token of the logged in user.
+	AccessToken string `protobuf:"bytes,1,opt,name=AccessToken,proto3" json:"AccessToken,omitempty"`
+	// string IDToken=2;
+	ExpiresIn        int64  `protobuf:"varint,2,opt,name=ExpiresIn,proto3" json:"ExpiresIn,omitempty"`
+	RefreshExpiresIn int64  `protobuf:"varint,3,opt,name=RefreshExpiresIn,proto3" json:"RefreshExpiresIn,omitempty"`
+	RefreshToken     string `protobuf:"bytes,4,opt,name=RefreshToken,proto3" json:"RefreshToken,omitempty"`
+	TokenType        string `protobuf:"bytes,5,opt,name=TokenType,proto3" json:"TokenType,omitempty"`
+	NotBeforePolicy  int32  `protobuf:"varint,6,opt,name=NotBeforePolicy,proto3" json:"NotBeforePolicy,omitempty"`
+	SessionState     string `protobuf:"bytes,7,opt,name=SessionState,proto3" json:"SessionState,omitempty"`
+	Scope            string `protobuf:"bytes,8,opt,name=Scope,proto3" json:"Scope,omitempty"` //string token = 1; // Auth token of the logged in user.
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -238,13 +238,6 @@ func (*LoginResponse) Descriptor() ([]byte, []int) {
 func (x *LoginResponse) GetAccessToken() string {
 	if x != nil {
 		return x.AccessToken
-	}
-	return ""
-}
-
-func (x *LoginResponse) GetIDToken() string {
-	if x != nil {
-		return x.IDToken
 	}
 	return ""
 }
@@ -580,17 +573,16 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x04user\x18\x01 \x01(\tR\x04user\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x1c\n" +
-	"\trealmName\x18\x04 \x01(\tR\trealmName\"\xbb\x02\n" +
+	"\trealmName\x18\x04 \x01(\tR\trealmName\"\xa1\x02\n" +
 	"\rLoginResponse\x12 \n" +
-	"\vAccessToken\x18\x01 \x01(\tR\vAccessToken\x12\x18\n" +
-	"\aIDToken\x18\x02 \x01(\tR\aIDToken\x12\x1c\n" +
-	"\tExpiresIn\x18\x03 \x01(\x03R\tExpiresIn\x12*\n" +
-	"\x10RefreshExpiresIn\x18\x04 \x01(\x03R\x10RefreshExpiresIn\x12\"\n" +
-	"\fRefreshToken\x18\x05 \x01(\tR\fRefreshToken\x12\x1c\n" +
-	"\tTokenType\x18\x06 \x01(\tR\tTokenType\x12(\n" +
-	"\x0fNotBeforePolicy\x18\a \x01(\x05R\x0fNotBeforePolicy\x12\"\n" +
-	"\fSessionState\x18\b \x01(\tR\fSessionState\x12\x14\n" +
-	"\x05Scope\x18\t \x01(\tR\x05Scope\"m\n" +
+	"\vAccessToken\x18\x01 \x01(\tR\vAccessToken\x12\x1c\n" +
+	"\tExpiresIn\x18\x02 \x01(\x03R\tExpiresIn\x12*\n" +
+	"\x10RefreshExpiresIn\x18\x03 \x01(\x03R\x10RefreshExpiresIn\x12\"\n" +
+	"\fRefreshToken\x18\x04 \x01(\tR\fRefreshToken\x12\x1c\n" +
+	"\tTokenType\x18\x05 \x01(\tR\tTokenType\x12(\n" +
+	"\x0fNotBeforePolicy\x18\x06 \x01(\x05R\x0fNotBeforePolicy\x12\"\n" +
+	"\fSessionState\x18\a \x01(\tR\fSessionState\x12\x14\n" +
+	"\x05Scope\x18\b \x01(\tR\x05Scope\"m\n" +
 	"\rLogoutRequest\x12\x16\n" +
 	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\"\n" +
 	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\x12 \n" +

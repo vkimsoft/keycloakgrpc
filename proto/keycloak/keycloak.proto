@@ -47,14 +47,14 @@ message LoginRequest {
 message LoginResponse {
 	//gocloak.JWT token=1;
 	string AccessToken = 1;
-	string IDToken=2;         
-	int64 ExpiresIn=3;
-	int64 RefreshExpiresIn=4;
-	string RefreshToken=5;
-	string TokenType=6;
-	int32 NotBeforePolicy=7;
-	string SessionState=8;
-	string Scope=9;
+	//string IDToken=2;         
+	int64 ExpiresIn=2;
+	int64 RefreshExpiresIn=3;
+	string RefreshToken=4;
+	string TokenType=5;
+	int32 NotBeforePolicy=6;
+	string SessionState=7;
+	string Scope=8;
   //string token = 1; // Auth token of the logged in user.
 }
 
