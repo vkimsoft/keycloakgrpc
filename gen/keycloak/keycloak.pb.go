@@ -712,10 +712,10 @@ type UserInfoResponse struct {
 	Email         string                 `protobuf:"bytes,8,opt,name=Email,proto3" json:"Email,omitempty"`
 	Attributes    *ArrayOfStrings        `protobuf:"bytes,9,opt,name=Attributes,proto3" json:"Attributes,omitempty"`
 	Access        []string               `protobuf:"bytes,10,rep,name=Access,proto3" json:"Access,omitempty"`
-	ClientRoles   *ArrayOfStrings        `protobuf:"bytes,11,opt,name=ClientRoles,proto3" json:"ClientRoles,omitempty"`
-	RealmRoles    []string               `protobuf:"bytes,12,rep,name=RealmRoles,proto3" json:"RealmRoles,omitempty"`
-	Groups        []string               `protobuf:"bytes,13,rep,name=Groups,proto3" json:"Groups,omitempty"`
-	Credentials   []string               `protobuf:"bytes,14,rep,name=Credentials,proto3" json:"Credentials,omitempty"`
+	// ArrayOfStrings ClientRoles=11;
+	RealmRoles    []string `protobuf:"bytes,12,rep,name=RealmRoles,proto3" json:"RealmRoles,omitempty"`
+	Groups        []string `protobuf:"bytes,13,rep,name=Groups,proto3" json:"Groups,omitempty"`
+	Name          string   `protobuf:"bytes,14,opt,name=Name,proto3" json:"Name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -820,13 +820,6 @@ func (x *UserInfoResponse) GetAccess() []string {
 	return nil
 }
 
-func (x *UserInfoResponse) GetClientRoles() *ArrayOfStrings {
-	if x != nil {
-		return x.ClientRoles
-	}
-	return nil
-}
-
 func (x *UserInfoResponse) GetRealmRoles() []string {
 	if x != nil {
 		return x.RealmRoles
@@ -841,11 +834,11 @@ func (x *UserInfoResponse) GetGroups() []string {
 	return nil
 }
 
-func (x *UserInfoResponse) GetCredentials() []string {
+func (x *UserInfoResponse) GetName() string {
 	if x != nil {
-		return x.Credentials
+		return x.Name
 	}
-	return nil
+	return ""
 }
 
 var File_keycloak_keycloak_proto protoreflect.FileDescriptor
@@ -896,7 +889,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\fRowOfStrings\x12\x10\n" +
 	"\x03row\x18\x01 \x03(\tR\x03row\"6\n" +
 	"\x0eArrayOfStrings\x12$\n" +
-	"\x03col\x18\x01 \x03(\v2\x12.auth.RowOfStringsR\x03col\"\xc9\x03\n" +
+	"\x03col\x18\x01 \x03(\v2\x12.auth.RowOfStringsR\x03col\"\x83\x03\n" +
 	"\x10UserInfoResponse\x12\x0e\n" +
 	"\x02Id\x18\x01 \x01(\tR\x02Id\x12\x19\n" +
 	"\bRealm_id\x18\x02 \x01(\tR\aRealmId\x12\x1a\n" +
@@ -910,13 +903,12 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"Attributes\x18\t \x01(\v2\x14.auth.ArrayOfStringsR\n" +
 	"Attributes\x12\x16\n" +
 	"\x06Access\x18\n" +
-	" \x03(\tR\x06Access\x126\n" +
-	"\vClientRoles\x18\v \x01(\v2\x14.auth.ArrayOfStringsR\vClientRoles\x12\x1e\n" +
+	" \x03(\tR\x06Access\x12\x1e\n" +
 	"\n" +
 	"RealmRoles\x18\f \x03(\tR\n" +
 	"RealmRoles\x12\x16\n" +
-	"\x06Groups\x18\r \x03(\tR\x06Groups\x12 \n" +
-	"\vCredentials\x18\x0e \x03(\tR\vCredentials2\xda\x02\n" +
+	"\x06Groups\x18\r \x03(\tR\x06Groups\x12\x12\n" +
+	"\x04Name\x18\x0e \x01(\tR\x04Name2\xda\x02\n" +
 	"\x04Auth\x12>\n" +
 	"\rClientConnect\x12\x17.auth.SetConnectRequest\x1a\x14.auth.ServerResponse\x125\n" +
 	"\tGetClient\x12\x12.auth.LoginRequest\x1a\x14.auth.ServerResponse\x120\n" +
@@ -956,24 +948,23 @@ var file_keycloak_keycloak_proto_goTypes = []any{
 var file_keycloak_keycloak_proto_depIdxs = []int32{
 	10, // 0: auth.ArrayOfStrings.col:type_name -> auth.RowOfStrings
 	11, // 1: auth.UserInfoResponse.Attributes:type_name -> auth.ArrayOfStrings
-	11, // 2: auth.UserInfoResponse.ClientRoles:type_name -> auth.ArrayOfStrings
-	6,  // 3: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
-	2,  // 4: auth.Auth.GetClient:input_type -> auth.LoginRequest
-	2,  // 5: auth.Auth.Login:input_type -> auth.LoginRequest
-	9,  // 6: auth.Auth.GetUserInfo:input_type -> auth.UserInfoRequest
-	0,  // 7: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
-	4,  // 8: auth.Auth.Logout:input_type -> auth.LogoutRequest
-	8,  // 9: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
-	8,  // 10: auth.Auth.GetClient:output_type -> auth.ServerResponse
-	3,  // 11: auth.Auth.Login:output_type -> auth.LoginResponse
-	12, // 12: auth.Auth.GetUserInfo:output_type -> auth.UserInfoResponse
-	1,  // 13: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
-	5,  // 14: auth.Auth.Logout:output_type -> auth.LogoutResponse
-	9,  // [9:15] is the sub-list for method output_type
-	3,  // [3:9] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	6,  // 2: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
+	2,  // 3: auth.Auth.GetClient:input_type -> auth.LoginRequest
+	2,  // 4: auth.Auth.Login:input_type -> auth.LoginRequest
+	9,  // 5: auth.Auth.GetUserInfo:input_type -> auth.UserInfoRequest
+	0,  // 6: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
+	4,  // 7: auth.Auth.Logout:input_type -> auth.LogoutRequest
+	8,  // 8: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
+	8,  // 9: auth.Auth.GetClient:output_type -> auth.ServerResponse
+	3,  // 10: auth.Auth.Login:output_type -> auth.LoginResponse
+	12, // 11: auth.Auth.GetUserInfo:output_type -> auth.UserInfoResponse
+	1,  // 12: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
+	5,  // 13: auth.Auth.Logout:output_type -> auth.LogoutResponse
+	8,  // [8:14] is the sub-list for method output_type
+	2,  // [2:8] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_keycloak_keycloak_proto_init() }
