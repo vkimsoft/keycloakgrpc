@@ -300,7 +300,9 @@ func (x *LoginResponse) GetScope() string {
 
 type LogoutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"` // Auth token of the user to logout.
+	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"` // Auth token of the user to logout.
+	AccessToken   string                 `protobuf:"bytes,3,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -335,9 +337,23 @@ func (*LogoutRequest) Descriptor() ([]byte, []int) {
 	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *LogoutRequest) GetToken() string {
+func (x *LogoutRequest) GetUserId() string {
 	if x != nil {
-		return x.Token
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *LogoutRequest) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *LogoutRequest) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
 	}
 	return ""
 }
@@ -574,9 +590,11 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\tTokenType\x18\x06 \x01(\tR\tTokenType\x12(\n" +
 	"\x0fNotBeforePolicy\x18\a \x01(\x05R\x0fNotBeforePolicy\x12\"\n" +
 	"\fSessionState\x18\b \x01(\tR\fSessionState\x12\x14\n" +
-	"\x05Scope\x18\t \x01(\tR\x05Scope\"%\n" +
-	"\rLogoutRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"*\n" +
+	"\x05Scope\x18\t \x01(\tR\x05Scope\"m\n" +
+	"\rLogoutRequest\x12\x16\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\"\n" +
+	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\x12 \n" +
+	"\vaccessToken\x18\x03 \x01(\tR\vaccessToken\"*\n" +
 	"\x0eLogoutResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"i\n" +
 	"\x11SetConnectRequest\x12\x1a\n" +

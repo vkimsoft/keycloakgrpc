@@ -59,7 +59,9 @@ message LoginResponse {
 }
 
 message LogoutRequest {
-  string token = 1; // Auth token of the user to logout.
+	string userId=1;
+  string refreshToken = 2; // Auth token of the user to logout.
+	string accessToken=3;
 }
 message LogoutResponse {
   bool success = 1; // Indicates whether the logout was successful.
