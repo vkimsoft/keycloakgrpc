@@ -12,6 +12,7 @@ service Auth {
   //rpc Register (RegisterRequest) returns (RegisterResponse);
   // Login logs in a user and returns an auth token.
   rpc Login (LoginRequest) returns (LoginResponse);
+	rpc GetUserInfo(UserInfoRequest) returns (UserInfoResponse);
   // IsAdmin checks whether a user is an admin.
   rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
   rpc Logout (LogoutRequest) returns (LogoutResponse);
@@ -60,8 +61,8 @@ message LoginResponse {
 
 message LogoutRequest {
 	string userId=1;
-  string refreshToken = 2; // Auth token of the user to logout.
-	string accessToken=3;
+  optional string refreshToken = 2; // Auth token of the user to logout.
+	optional string accessToken=3;
 }
 message LogoutResponse {
   bool success = 1; // Indicates whether the logout was successful.
@@ -81,4 +82,42 @@ message ServerResponse{
     bool success = 1;
     string value = 2;
     string error = 3;
+}
+
+message UserInfoRequest{
+  string realm=1;
+ 	string accessToken=2;
+}
+
+message RowOfStrings {
+  repeated string row = 1;
+}
+
+message ArrayOfStrings {
+  repeated RowOfStrings col = 1;
+}
+message UserInfoResponse{
+  string Id=1;
+	string Realm_id=2;
+	string Username=3;
+	bool Enabled=4;
+	bool EmailVerified=5;
+	string FirstName=6;
+	string LastName=7;
+	string Email=8;
+	ArrayOfStrings Attributes=9;
+	repeated string Access=10;
+	ArrayOfStrings ClientRoles=11;
+	repeated string RealmRoles=12;
+	repeated string Groups=13;
+ repeated string Credentials=14;
+	// 	Attributes                 map[string][]string `json:"attributes,omitempty"`
+	// DisableableCredentialTypes []interface{}       `json:"disableableCredentialTypes,omitempty"`
+	// RequiredActions            []string            `json:"requiredActions,omitempty"`
+	// Access                     map[string]bool     `json:"access,omitempty"`
+	// ClientRoles                map[string][]string `json:"clientRoles,omitempty"`
+	// RealmRoles                 []string            `json:"realmRoles,omitempty"`
+	// Groups                     []string            `json:"groups,omitempty"`
+	// ServiceAccountClientID     string              `json:"serviceAccountClientId,omitempty"`
+	// Credentials                []any               `json:"credentials,omitempty"`
 }

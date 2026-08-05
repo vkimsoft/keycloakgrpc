@@ -294,8 +294,8 @@ func (x *LoginResponse) GetScope() string {
 type LogoutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
-	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"` // Auth token of the user to logout.
-	AccessToken   string                 `protobuf:"bytes,3,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken  *string                `protobuf:"bytes,2,opt,name=refreshToken,proto3,oneof" json:"refreshToken,omitempty"` // Auth token of the user to logout.
+	AccessToken   *string                `protobuf:"bytes,3,opt,name=accessToken,proto3,oneof" json:"accessToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -338,15 +338,15 @@ func (x *LogoutRequest) GetUserId() string {
 }
 
 func (x *LogoutRequest) GetRefreshToken() string {
-	if x != nil {
-		return x.RefreshToken
+	if x != nil && x.RefreshToken != nil {
+		return *x.RefreshToken
 	}
 	return ""
 }
 
 func (x *LogoutRequest) GetAccessToken() string {
-	if x != nil {
-		return x.AccessToken
+	if x != nil && x.AccessToken != nil {
+		return *x.AccessToken
 	}
 	return ""
 }
@@ -560,6 +560,294 @@ func (x *ServerResponse) GetError() string {
 	return ""
 }
 
+type UserInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Realm         string                 `protobuf:"bytes,1,opt,name=realm,proto3" json:"realm,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,2,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserInfoRequest) Reset() {
+	*x = UserInfoRequest{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserInfoRequest) ProtoMessage() {}
+
+func (x *UserInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserInfoRequest.ProtoReflect.Descriptor instead.
+func (*UserInfoRequest) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UserInfoRequest) GetRealm() string {
+	if x != nil {
+		return x.Realm
+	}
+	return ""
+}
+
+func (x *UserInfoRequest) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+type RowOfStrings struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Row           []string               `protobuf:"bytes,1,rep,name=row,proto3" json:"row,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RowOfStrings) Reset() {
+	*x = RowOfStrings{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RowOfStrings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RowOfStrings) ProtoMessage() {}
+
+func (x *RowOfStrings) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RowOfStrings.ProtoReflect.Descriptor instead.
+func (*RowOfStrings) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *RowOfStrings) GetRow() []string {
+	if x != nil {
+		return x.Row
+	}
+	return nil
+}
+
+type ArrayOfStrings struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Col           []*RowOfStrings        `protobuf:"bytes,1,rep,name=col,proto3" json:"col,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ArrayOfStrings) Reset() {
+	*x = ArrayOfStrings{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArrayOfStrings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArrayOfStrings) ProtoMessage() {}
+
+func (x *ArrayOfStrings) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArrayOfStrings.ProtoReflect.Descriptor instead.
+func (*ArrayOfStrings) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ArrayOfStrings) GetCol() []*RowOfStrings {
+	if x != nil {
+		return x.Col
+	}
+	return nil
+}
+
+type UserInfoResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	RealmId       string                 `protobuf:"bytes,2,opt,name=Realm_id,json=RealmId,proto3" json:"Realm_id,omitempty"`
+	Username      string                 `protobuf:"bytes,3,opt,name=Username,proto3" json:"Username,omitempty"`
+	Enabled       bool                   `protobuf:"varint,4,opt,name=Enabled,proto3" json:"Enabled,omitempty"`
+	EmailVerified bool                   `protobuf:"varint,5,opt,name=EmailVerified,proto3" json:"EmailVerified,omitempty"`
+	FirstName     string                 `protobuf:"bytes,6,opt,name=FirstName,proto3" json:"FirstName,omitempty"`
+	LastName      string                 `protobuf:"bytes,7,opt,name=LastName,proto3" json:"LastName,omitempty"`
+	Email         string                 `protobuf:"bytes,8,opt,name=Email,proto3" json:"Email,omitempty"`
+	Attributes    *ArrayOfStrings        `protobuf:"bytes,9,opt,name=Attributes,proto3" json:"Attributes,omitempty"`
+	Access        []string               `protobuf:"bytes,10,rep,name=Access,proto3" json:"Access,omitempty"`
+	ClientRoles   *ArrayOfStrings        `protobuf:"bytes,11,opt,name=ClientRoles,proto3" json:"ClientRoles,omitempty"`
+	RealmRoles    []string               `protobuf:"bytes,12,rep,name=RealmRoles,proto3" json:"RealmRoles,omitempty"`
+	Groups        []string               `protobuf:"bytes,13,rep,name=Groups,proto3" json:"Groups,omitempty"`
+	Credentials   []string               `protobuf:"bytes,14,rep,name=Credentials,proto3" json:"Credentials,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserInfoResponse) Reset() {
+	*x = UserInfoResponse{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserInfoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserInfoResponse) ProtoMessage() {}
+
+func (x *UserInfoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserInfoResponse.ProtoReflect.Descriptor instead.
+func (*UserInfoResponse) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *UserInfoResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UserInfoResponse) GetRealmId() string {
+	if x != nil {
+		return x.RealmId
+	}
+	return ""
+}
+
+func (x *UserInfoResponse) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *UserInfoResponse) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *UserInfoResponse) GetEmailVerified() bool {
+	if x != nil {
+		return x.EmailVerified
+	}
+	return false
+}
+
+func (x *UserInfoResponse) GetFirstName() string {
+	if x != nil {
+		return x.FirstName
+	}
+	return ""
+}
+
+func (x *UserInfoResponse) GetLastName() string {
+	if x != nil {
+		return x.LastName
+	}
+	return ""
+}
+
+func (x *UserInfoResponse) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *UserInfoResponse) GetAttributes() *ArrayOfStrings {
+	if x != nil {
+		return x.Attributes
+	}
+	return nil
+}
+
+func (x *UserInfoResponse) GetAccess() []string {
+	if x != nil {
+		return x.Access
+	}
+	return nil
+}
+
+func (x *UserInfoResponse) GetClientRoles() *ArrayOfStrings {
+	if x != nil {
+		return x.ClientRoles
+	}
+	return nil
+}
+
+func (x *UserInfoResponse) GetRealmRoles() []string {
+	if x != nil {
+		return x.RealmRoles
+	}
+	return nil
+}
+
+func (x *UserInfoResponse) GetGroups() []string {
+	if x != nil {
+		return x.Groups
+	}
+	return nil
+}
+
+func (x *UserInfoResponse) GetCredentials() []string {
+	if x != nil {
+		return x.Credentials
+	}
+	return nil
+}
+
 var File_keycloak_keycloak_proto protoreflect.FileDescriptor
 
 const file_keycloak_keycloak_proto_rawDesc = "" +
@@ -582,11 +870,13 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\tTokenType\x18\x05 \x01(\tR\tTokenType\x12(\n" +
 	"\x0fNotBeforePolicy\x18\x06 \x01(\x05R\x0fNotBeforePolicy\x12\"\n" +
 	"\fSessionState\x18\a \x01(\tR\fSessionState\x12\x14\n" +
-	"\x05Scope\x18\b \x01(\tR\x05Scope\"m\n" +
+	"\x05Scope\x18\b \x01(\tR\x05Scope\"\x98\x01\n" +
 	"\rLogoutRequest\x12\x16\n" +
-	"\x06userId\x18\x01 \x01(\tR\x06userId\x12\"\n" +
-	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\x12 \n" +
-	"\vaccessToken\x18\x03 \x01(\tR\vaccessToken\"*\n" +
+	"\x06userId\x18\x01 \x01(\tR\x06userId\x12'\n" +
+	"\frefreshToken\x18\x02 \x01(\tH\x00R\frefreshToken\x88\x01\x01\x12%\n" +
+	"\vaccessToken\x18\x03 \x01(\tH\x01R\vaccessToken\x88\x01\x01B\x0f\n" +
+	"\r_refreshTokenB\x0e\n" +
+	"\f_accessToken\"*\n" +
 	"\x0eLogoutResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"i\n" +
 	"\x11SetConnectRequest\x12\x1a\n" +
@@ -599,11 +889,39 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x0eServerResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error2\x9c\x02\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"I\n" +
+	"\x0fUserInfoRequest\x12\x14\n" +
+	"\x05realm\x18\x01 \x01(\tR\x05realm\x12 \n" +
+	"\vaccessToken\x18\x02 \x01(\tR\vaccessToken\" \n" +
+	"\fRowOfStrings\x12\x10\n" +
+	"\x03row\x18\x01 \x03(\tR\x03row\"6\n" +
+	"\x0eArrayOfStrings\x12$\n" +
+	"\x03col\x18\x01 \x03(\v2\x12.auth.RowOfStringsR\x03col\"\xc9\x03\n" +
+	"\x10UserInfoResponse\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\tR\x02Id\x12\x19\n" +
+	"\bRealm_id\x18\x02 \x01(\tR\aRealmId\x12\x1a\n" +
+	"\bUsername\x18\x03 \x01(\tR\bUsername\x12\x18\n" +
+	"\aEnabled\x18\x04 \x01(\bR\aEnabled\x12$\n" +
+	"\rEmailVerified\x18\x05 \x01(\bR\rEmailVerified\x12\x1c\n" +
+	"\tFirstName\x18\x06 \x01(\tR\tFirstName\x12\x1a\n" +
+	"\bLastName\x18\a \x01(\tR\bLastName\x12\x14\n" +
+	"\x05Email\x18\b \x01(\tR\x05Email\x124\n" +
+	"\n" +
+	"Attributes\x18\t \x01(\v2\x14.auth.ArrayOfStringsR\n" +
+	"Attributes\x12\x16\n" +
+	"\x06Access\x18\n" +
+	" \x03(\tR\x06Access\x126\n" +
+	"\vClientRoles\x18\v \x01(\v2\x14.auth.ArrayOfStringsR\vClientRoles\x12\x1e\n" +
+	"\n" +
+	"RealmRoles\x18\f \x03(\tR\n" +
+	"RealmRoles\x12\x16\n" +
+	"\x06Groups\x18\r \x03(\tR\x06Groups\x12 \n" +
+	"\vCredentials\x18\x0e \x03(\tR\vCredentials2\xda\x02\n" +
 	"\x04Auth\x12>\n" +
 	"\rClientConnect\x12\x17.auth.SetConnectRequest\x1a\x14.auth.ServerResponse\x125\n" +
 	"\tGetClient\x12\x12.auth.LoginRequest\x1a\x14.auth.ServerResponse\x120\n" +
-	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x126\n" +
+	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12<\n" +
+	"\vGetUserInfo\x12\x15.auth.UserInfoRequest\x1a\x16.auth.UserInfoResponse\x126\n" +
 	"\aIsAdmin\x12\x14.auth.IsAdminRequest\x1a\x15.auth.IsAdminResponse\x123\n" +
 	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x14.auth.LogoutResponseBEZCgithub.com/vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
 
@@ -619,7 +937,7 @@ func file_keycloak_keycloak_proto_rawDescGZIP() []byte {
 	return file_keycloak_keycloak_proto_rawDescData
 }
 
-var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_keycloak_keycloak_proto_goTypes = []any{
 	(*IsAdminRequest)(nil),    // 0: auth.IsAdminRequest
 	(*IsAdminResponse)(nil),   // 1: auth.IsAdminResponse
@@ -630,23 +948,32 @@ var file_keycloak_keycloak_proto_goTypes = []any{
 	(*SetConnectRequest)(nil), // 6: auth.SetConnectRequest
 	(*GetRequest)(nil),        // 7: auth.GetRequest
 	(*ServerResponse)(nil),    // 8: auth.ServerResponse
+	(*UserInfoRequest)(nil),   // 9: auth.UserInfoRequest
+	(*RowOfStrings)(nil),      // 10: auth.RowOfStrings
+	(*ArrayOfStrings)(nil),    // 11: auth.ArrayOfStrings
+	(*UserInfoResponse)(nil),  // 12: auth.UserInfoResponse
 }
 var file_keycloak_keycloak_proto_depIdxs = []int32{
-	6, // 0: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
-	2, // 1: auth.Auth.GetClient:input_type -> auth.LoginRequest
-	2, // 2: auth.Auth.Login:input_type -> auth.LoginRequest
-	0, // 3: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
-	4, // 4: auth.Auth.Logout:input_type -> auth.LogoutRequest
-	8, // 5: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
-	8, // 6: auth.Auth.GetClient:output_type -> auth.ServerResponse
-	3, // 7: auth.Auth.Login:output_type -> auth.LoginResponse
-	1, // 8: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
-	5, // 9: auth.Auth.Logout:output_type -> auth.LogoutResponse
-	5, // [5:10] is the sub-list for method output_type
-	0, // [0:5] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	10, // 0: auth.ArrayOfStrings.col:type_name -> auth.RowOfStrings
+	11, // 1: auth.UserInfoResponse.Attributes:type_name -> auth.ArrayOfStrings
+	11, // 2: auth.UserInfoResponse.ClientRoles:type_name -> auth.ArrayOfStrings
+	6,  // 3: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
+	2,  // 4: auth.Auth.GetClient:input_type -> auth.LoginRequest
+	2,  // 5: auth.Auth.Login:input_type -> auth.LoginRequest
+	9,  // 6: auth.Auth.GetUserInfo:input_type -> auth.UserInfoRequest
+	0,  // 7: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
+	4,  // 8: auth.Auth.Logout:input_type -> auth.LogoutRequest
+	8,  // 9: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
+	8,  // 10: auth.Auth.GetClient:output_type -> auth.ServerResponse
+	3,  // 11: auth.Auth.Login:output_type -> auth.LoginResponse
+	12, // 12: auth.Auth.GetUserInfo:output_type -> auth.UserInfoResponse
+	1,  // 13: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
+	5,  // 14: auth.Auth.Logout:output_type -> auth.LogoutResponse
+	9,  // [9:15] is the sub-list for method output_type
+	3,  // [3:9] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_keycloak_keycloak_proto_init() }
@@ -654,13 +981,14 @@ func file_keycloak_keycloak_proto_init() {
 	if File_keycloak_keycloak_proto != nil {
 		return
 	}
+	file_keycloak_keycloak_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_keycloak_keycloak_proto_rawDesc), len(file_keycloak_keycloak_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
