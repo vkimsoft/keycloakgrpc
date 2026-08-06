@@ -86,7 +86,8 @@ message ServerResponse{
 
 message UserInfoRequest{
   string realm=1;
- 	string accessToken=2;
+	string user_id=2;
+ 	string accessToken=3;
 }
 
 message RowOfStrings {

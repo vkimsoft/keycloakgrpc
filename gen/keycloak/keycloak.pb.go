@@ -563,7 +563,8 @@ func (x *ServerResponse) GetError() string {
 type UserInfoRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Realm         string                 `protobuf:"bytes,1,opt,name=realm,proto3" json:"realm,omitempty"`
-	AccessToken   string                 `protobuf:"bytes,2,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,3,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -601,6 +602,13 @@ func (*UserInfoRequest) Descriptor() ([]byte, []int) {
 func (x *UserInfoRequest) GetRealm() string {
 	if x != nil {
 		return x.Realm
+	}
+	return ""
+}
+
+func (x *UserInfoRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
 	}
 	return ""
 }
@@ -882,10 +890,11 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x0eServerResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\x12\x14\n" +
-	"\x05error\x18\x03 \x01(\tR\x05error\"I\n" +
+	"\x05error\x18\x03 \x01(\tR\x05error\"b\n" +
 	"\x0fUserInfoRequest\x12\x14\n" +
-	"\x05realm\x18\x01 \x01(\tR\x05realm\x12 \n" +
-	"\vaccessToken\x18\x02 \x01(\tR\vaccessToken\" \n" +
+	"\x05realm\x18\x01 \x01(\tR\x05realm\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12 \n" +
+	"\vaccessToken\x18\x03 \x01(\tR\vaccessToken\" \n" +
 	"\fRowOfStrings\x12\x10\n" +
 	"\x03row\x18\x01 \x03(\tR\x03row\"6\n" +
 	"\x0eArrayOfStrings\x12$\n" +
