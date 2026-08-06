@@ -666,7 +666,7 @@ func (x *RowOfStrings) GetRow() []string {
 
 type ArrayOfStrings struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Col           []*RowOfStrings        `protobuf:"bytes,1,rep,name=col,proto3" json:"col,omitempty"`
+	Col           *RowOfStrings          `protobuf:"bytes,1,opt,name=col,proto3" json:"col,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -701,7 +701,7 @@ func (*ArrayOfStrings) Descriptor() ([]byte, []int) {
 	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *ArrayOfStrings) GetCol() []*RowOfStrings {
+func (x *ArrayOfStrings) GetCol() *RowOfStrings {
 	if x != nil {
 		return x.Col
 	}
@@ -718,7 +718,7 @@ type UserInfoResponse struct {
 	FirstName     string                 `protobuf:"bytes,6,opt,name=FirstName,proto3" json:"FirstName,omitempty"`
 	LastName      string                 `protobuf:"bytes,7,opt,name=LastName,proto3" json:"LastName,omitempty"`
 	Email         string                 `protobuf:"bytes,8,opt,name=Email,proto3" json:"Email,omitempty"`
-	Attributes    *ArrayOfStrings        `protobuf:"bytes,9,opt,name=Attributes,proto3" json:"Attributes,omitempty"`
+	Attributes    map[string]string      `protobuf:"bytes,9,rep,name=Attributes,proto3" json:"Attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Access        []string               `protobuf:"bytes,10,rep,name=Access,proto3" json:"Access,omitempty"`
 	// ArrayOfStrings ClientRoles=11;
 	RealmRoles    []string `protobuf:"bytes,12,rep,name=RealmRoles,proto3" json:"RealmRoles,omitempty"`
@@ -814,7 +814,7 @@ func (x *UserInfoResponse) GetEmail() string {
 	return ""
 }
 
-func (x *UserInfoResponse) GetAttributes() *ArrayOfStrings {
+func (x *UserInfoResponse) GetAttributes() map[string]string {
 	if x != nil {
 		return x.Attributes
 	}
@@ -898,7 +898,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\fRowOfStrings\x12\x10\n" +
 	"\x03row\x18\x01 \x03(\tR\x03row\"6\n" +
 	"\x0eArrayOfStrings\x12$\n" +
-	"\x03col\x18\x01 \x03(\v2\x12.auth.RowOfStringsR\x03col\"\x83\x03\n" +
+	"\x03col\x18\x01 \x01(\v2\x12.auth.RowOfStringsR\x03col\"\xd4\x03\n" +
 	"\x10UserInfoResponse\x12\x0e\n" +
 	"\x02Id\x18\x01 \x01(\tR\x02Id\x12\x19\n" +
 	"\bRealm_id\x18\x02 \x01(\tR\aRealmId\x12\x1a\n" +
@@ -907,9 +907,9 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\rEmailVerified\x18\x05 \x01(\bR\rEmailVerified\x12\x1c\n" +
 	"\tFirstName\x18\x06 \x01(\tR\tFirstName\x12\x1a\n" +
 	"\bLastName\x18\a \x01(\tR\bLastName\x12\x14\n" +
-	"\x05Email\x18\b \x01(\tR\x05Email\x124\n" +
+	"\x05Email\x18\b \x01(\tR\x05Email\x12F\n" +
 	"\n" +
-	"Attributes\x18\t \x01(\v2\x14.auth.ArrayOfStringsR\n" +
+	"Attributes\x18\t \x03(\v2&.auth.UserInfoResponse.AttributesEntryR\n" +
 	"Attributes\x12\x16\n" +
 	"\x06Access\x18\n" +
 	" \x03(\tR\x06Access\x12\x1e\n" +
@@ -917,7 +917,10 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"RealmRoles\x18\f \x03(\tR\n" +
 	"RealmRoles\x12\x16\n" +
 	"\x06Groups\x18\r \x03(\tR\x06Groups\x12\x12\n" +
-	"\x04Name\x18\x0e \x01(\tR\x04Name2\xda\x02\n" +
+	"\x04Name\x18\x0e \x01(\tR\x04Name\x1a=\n" +
+	"\x0fAttributesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012\xda\x02\n" +
 	"\x04Auth\x12>\n" +
 	"\rClientConnect\x12\x17.auth.SetConnectRequest\x1a\x14.auth.ServerResponse\x125\n" +
 	"\tGetClient\x12\x12.auth.LoginRequest\x1a\x14.auth.ServerResponse\x120\n" +
@@ -938,7 +941,7 @@ func file_keycloak_keycloak_proto_rawDescGZIP() []byte {
 	return file_keycloak_keycloak_proto_rawDescData
 }
 
-var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_keycloak_keycloak_proto_goTypes = []any{
 	(*IsAdminRequest)(nil),    // 0: auth.IsAdminRequest
 	(*IsAdminResponse)(nil),   // 1: auth.IsAdminResponse
@@ -953,10 +956,11 @@ var file_keycloak_keycloak_proto_goTypes = []any{
 	(*RowOfStrings)(nil),      // 10: auth.RowOfStrings
 	(*ArrayOfStrings)(nil),    // 11: auth.ArrayOfStrings
 	(*UserInfoResponse)(nil),  // 12: auth.UserInfoResponse
+	nil,                       // 13: auth.UserInfoResponse.AttributesEntry
 }
 var file_keycloak_keycloak_proto_depIdxs = []int32{
 	10, // 0: auth.ArrayOfStrings.col:type_name -> auth.RowOfStrings
-	11, // 1: auth.UserInfoResponse.Attributes:type_name -> auth.ArrayOfStrings
+	13, // 1: auth.UserInfoResponse.Attributes:type_name -> auth.UserInfoResponse.AttributesEntry
 	6,  // 2: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
 	2,  // 3: auth.Auth.GetClient:input_type -> auth.LoginRequest
 	2,  // 4: auth.Auth.Login:input_type -> auth.LoginRequest
@@ -988,7 +992,7 @@ func file_keycloak_keycloak_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_keycloak_keycloak_proto_rawDesc), len(file_keycloak_keycloak_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

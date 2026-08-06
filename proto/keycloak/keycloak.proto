@@ -95,7 +95,7 @@ message RowOfStrings {
 }
 
 message ArrayOfStrings {
-  repeated RowOfStrings col = 1;
+  RowOfStrings col = 1;
 }
 message UserInfoResponse{
   string Id=1;
@@ -106,7 +106,7 @@ message UserInfoResponse{
 	string FirstName=6;
 	string LastName=7;
 	string Email=8;
-	ArrayOfStrings Attributes=9;
+	map<string, string> Attributes=9;
 	repeated string Access=10;
 	//ArrayOfStrings ClientRoles=11;
 	repeated string RealmRoles=12;
