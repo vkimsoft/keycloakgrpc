@@ -724,6 +724,8 @@ type UserInfoResponse struct {
 	RealmRoles    []string `protobuf:"bytes,12,rep,name=RealmRoles,proto3" json:"RealmRoles,omitempty"`
 	Groups        []string `protobuf:"bytes,13,rep,name=Groups,proto3" json:"Groups,omitempty"`
 	Name          string   `protobuf:"bytes,14,opt,name=Name,proto3" json:"Name,omitempty"`
+	Scope         string   `protobuf:"bytes,15,opt,name=Scope,proto3" json:"Scope,omitempty"`
+	SessionState  string   `protobuf:"bytes,16,opt,name=Session_state,json=SessionState,proto3" json:"Session_state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -849,6 +851,20 @@ func (x *UserInfoResponse) GetName() string {
 	return ""
 }
 
+func (x *UserInfoResponse) GetScope() string {
+	if x != nil {
+		return x.Scope
+	}
+	return ""
+}
+
+func (x *UserInfoResponse) GetSessionState() string {
+	if x != nil {
+		return x.SessionState
+	}
+	return ""
+}
+
 var File_keycloak_keycloak_proto protoreflect.FileDescriptor
 
 const file_keycloak_keycloak_proto_rawDesc = "" +
@@ -898,7 +914,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\fRowOfStrings\x12\x10\n" +
 	"\x03row\x18\x01 \x03(\tR\x03row\"6\n" +
 	"\x0eArrayOfStrings\x12$\n" +
-	"\x03col\x18\x01 \x01(\v2\x12.auth.RowOfStringsR\x03col\"\xd4\x03\n" +
+	"\x03col\x18\x01 \x01(\v2\x12.auth.RowOfStringsR\x03col\"\x8f\x04\n" +
 	"\x10UserInfoResponse\x12\x0e\n" +
 	"\x02Id\x18\x01 \x01(\tR\x02Id\x12\x19\n" +
 	"\bRealm_id\x18\x02 \x01(\tR\aRealmId\x12\x1a\n" +
@@ -917,7 +933,9 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"RealmRoles\x18\f \x03(\tR\n" +
 	"RealmRoles\x12\x16\n" +
 	"\x06Groups\x18\r \x03(\tR\x06Groups\x12\x12\n" +
-	"\x04Name\x18\x0e \x01(\tR\x04Name\x1a=\n" +
+	"\x04Name\x18\x0e \x01(\tR\x04Name\x12\x14\n" +
+	"\x05Scope\x18\x0f \x01(\tR\x05Scope\x12#\n" +
+	"\rSession_state\x18\x10 \x01(\tR\fSessionState\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x012\xda\x02\n" +
