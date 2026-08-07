@@ -13,6 +13,7 @@ service Auth {
   // Login logs in a user and returns an auth token.
   rpc Login (LoginRequest) returns (LoginResponse);
 	rpc GetUserInfo(UserInfoRequest) returns (UserInfoResponse);
+	rpc RefreshToken (RefreshRequest) returns (RefreshResponse);
   // IsAdmin checks whether a user is an admin.
   rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
   rpc Logout (LogoutRequest) returns (LogoutResponse);
@@ -123,4 +124,21 @@ message UserInfoResponse{
 	// Groups                     []string            `json:"groups,omitempty"`
 	// ServiceAccountClientID     string              `json:"serviceAccountClientId,omitempty"`
 	// Credentials                []any               `json:"credentials,omitempty"`
+}
+
+message RefreshRequest{
+	string RefreshToken=1;
+	string clientID=2;
+	string clientSecret=3;
+	string realm=4;
+}
+message RefreshResponse {
+	string AccessToken = 1;       
+	int64 ExpiresIn=2;
+	int64 RefreshExpiresIn=3;
+	string RefreshToken=4;
+	string TokenType=5;
+	int32 NotBeforePolicy=6;
+	string SessionState=7;
+	string Scope=8;
 }
