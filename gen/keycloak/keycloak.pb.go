@@ -726,6 +726,7 @@ type UserInfoResponse struct {
 	Name          string   `protobuf:"bytes,14,opt,name=Name,proto3" json:"Name,omitempty"`
 	Scope         string   `protobuf:"bytes,15,opt,name=Scope,proto3" json:"Scope,omitempty"`
 	SessionState  string   `protobuf:"bytes,16,opt,name=SessionState,proto3" json:"SessionState,omitempty"`
+	ExpiresAt     int64    `protobuf:"varint,17,opt,name=ExpiresAt,proto3" json:"ExpiresAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -863,6 +864,13 @@ func (x *UserInfoResponse) GetSessionState() string {
 		return x.SessionState
 	}
 	return ""
+}
+
+func (x *UserInfoResponse) GetExpiresAt() int64 {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return 0
 }
 
 type RefreshRequest struct {
@@ -1082,7 +1090,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\fRowOfStrings\x12\x10\n" +
 	"\x03row\x18\x01 \x03(\tR\x03row\"6\n" +
 	"\x0eArrayOfStrings\x12$\n" +
-	"\x03col\x18\x01 \x01(\v2\x12.auth.RowOfStringsR\x03col\"\x8e\x04\n" +
+	"\x03col\x18\x01 \x01(\v2\x12.auth.RowOfStringsR\x03col\"\xac\x04\n" +
 	"\x10UserInfoResponse\x12\x0e\n" +
 	"\x02Id\x18\x01 \x01(\tR\x02Id\x12\x19\n" +
 	"\bRealm_id\x18\x02 \x01(\tR\aRealmId\x12\x1a\n" +
@@ -1103,7 +1111,8 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x06Groups\x18\r \x03(\tR\x06Groups\x12\x12\n" +
 	"\x04Name\x18\x0e \x01(\tR\x04Name\x12\x14\n" +
 	"\x05Scope\x18\x0f \x01(\tR\x05Scope\x12\"\n" +
-	"\fSessionState\x18\x10 \x01(\tR\fSessionState\x1a=\n" +
+	"\fSessionState\x18\x10 \x01(\tR\fSessionState\x12\x1c\n" +
+	"\tExpiresAt\x18\x11 \x01(\x03R\tExpiresAt\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x8a\x01\n" +
@@ -1128,7 +1137,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\vGetUserInfo\x12\x15.auth.UserInfoRequest\x1a\x16.auth.UserInfoResponse\x12;\n" +
 	"\fRefreshToken\x12\x14.auth.RefreshRequest\x1a\x15.auth.RefreshResponse\x126\n" +
 	"\aIsAdmin\x12\x14.auth.IsAdminRequest\x1a\x15.auth.IsAdminResponse\x123\n" +
-	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x14.auth.LogoutResponseBEZCgithub.com/vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
+	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x14.auth.LogoutResponseB:Z8vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
 
 var (
 	file_keycloak_keycloak_proto_rawDescOnce sync.Once

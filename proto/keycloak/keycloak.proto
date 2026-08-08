@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package auth;
 
-option go_package = "github.com/vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackproto";
+option go_package = "vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackproto";
 
 // Auth is service for managing permissions and roles.
 service Auth {
@@ -115,6 +115,7 @@ message UserInfoResponse{
   string Name=14;
 	string Scope=15;
   string SessionState=16;
+	int64 ExpiresAt=17;
 	// 	Attributes                 map[string][]string `json:"attributes,omitempty"`
 	// DisableableCredentialTypes []interface{}       `json:"disableableCredentialTypes,omitempty"`
 	// RequiredActions            []string            `json:"requiredActions,omitempty"`
