@@ -876,9 +876,10 @@ func (x *UserInfoResponse) GetExpiresAt() int64 {
 type RefreshRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RefreshToken  string                 `protobuf:"bytes,1,opt,name=RefreshToken,proto3" json:"RefreshToken,omitempty"`
-	ClientID      string                 `protobuf:"bytes,2,opt,name=clientID,proto3" json:"clientID,omitempty"`
-	ClientSecret  string                 `protobuf:"bytes,3,opt,name=clientSecret,proto3" json:"clientSecret,omitempty"`
-	Realm         string                 `protobuf:"bytes,4,opt,name=realm,proto3" json:"realm,omitempty"`
+	UserID        string                 `protobuf:"bytes,2,opt,name=userID,proto3" json:"userID,omitempty"`
+	ClientID      string                 `protobuf:"bytes,3,opt,name=clientID,proto3" json:"clientID,omitempty"`
+	ClientSecret  string                 `protobuf:"bytes,4,opt,name=clientSecret,proto3" json:"clientSecret,omitempty"`
+	Realm         string                 `protobuf:"bytes,5,opt,name=realm,proto3" json:"realm,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -916,6 +917,13 @@ func (*RefreshRequest) Descriptor() ([]byte, []int) {
 func (x *RefreshRequest) GetRefreshToken() string {
 	if x != nil {
 		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *RefreshRequest) GetUserID() string {
+	if x != nil {
+		return x.UserID
 	}
 	return ""
 }
@@ -1115,12 +1123,13 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\tExpiresAt\x18\x11 \x01(\x03R\tExpiresAt\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x8a\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa2\x01\n" +
 	"\x0eRefreshRequest\x12\"\n" +
-	"\fRefreshToken\x18\x01 \x01(\tR\fRefreshToken\x12\x1a\n" +
-	"\bclientID\x18\x02 \x01(\tR\bclientID\x12\"\n" +
-	"\fclientSecret\x18\x03 \x01(\tR\fclientSecret\x12\x14\n" +
-	"\x05realm\x18\x04 \x01(\tR\x05realm\"\xa3\x02\n" +
+	"\fRefreshToken\x18\x01 \x01(\tR\fRefreshToken\x12\x16\n" +
+	"\x06userID\x18\x02 \x01(\tR\x06userID\x12\x1a\n" +
+	"\bclientID\x18\x03 \x01(\tR\bclientID\x12\"\n" +
+	"\fclientSecret\x18\x04 \x01(\tR\fclientSecret\x12\x14\n" +
+	"\x05realm\x18\x05 \x01(\tR\x05realm\"\xa3\x02\n" +
 	"\x0fRefreshResponse\x12 \n" +
 	"\vAccessToken\x18\x01 \x01(\tR\vAccessToken\x12\x1c\n" +
 	"\tExpiresIn\x18\x02 \x01(\x03R\tExpiresIn\x12*\n" +
