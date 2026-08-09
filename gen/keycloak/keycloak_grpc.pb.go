@@ -46,7 +46,7 @@ type AuthClient interface {
 	// IsAdmin checks whether a user is an admin.
 	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
-	GetUserSessions(ctx context.Context, in *UserSessionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[UserSessionResponse], error)
+	GetUserSessions(ctx context.Context, in *UserSessionRequest, opts ...grpc.CallOption) (*UserSessionListResponse, error)
 }
 
 type authClient struct {
@@ -127,24 +127,15 @@ func (c *authClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc
 	return out, nil
 }
 
-func (c *authClient) GetUserSessions(ctx context.Context, in *UserSessionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[UserSessionResponse], error) {
+func (c *authClient) GetUserSessions(ctx context.Context, in *UserSessionRequest, opts ...grpc.CallOption) (*UserSessionListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Auth_ServiceDesc.Streams[0], Auth_GetUserSessions_FullMethodName, cOpts...)
+	out := new(UserSessionListResponse)
+	err := c.cc.Invoke(ctx, Auth_GetUserSessions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[UserSessionRequest, UserSessionResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
+	return out, nil
 }
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type Auth_GetUserSessionsClient = grpc.ServerStreamingClient[UserSessionResponse]
 
 // AuthServer is the server API for Auth service.
 // All implementations must embed UnimplementedAuthServer
@@ -163,7 +154,7 @@ type AuthServer interface {
 	// IsAdmin checks whether a user is an admin.
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
-	GetUserSessions(*UserSessionRequest, grpc.ServerStreamingServer[UserSessionResponse]) error
+	GetUserSessions(context.Context, *UserSessionRequest) (*UserSessionListResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -195,8 +186,8 @@ func (UnimplementedAuthServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdm
 func (UnimplementedAuthServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
 }
-func (UnimplementedAuthServer) GetUserSessions(*UserSessionRequest, grpc.ServerStreamingServer[UserSessionResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method GetUserSessions not implemented")
+func (UnimplementedAuthServer) GetUserSessions(context.Context, *UserSessionRequest) (*UserSessionListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserSessions not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 func (UnimplementedAuthServer) testEmbeddedByValue()              {}
@@ -345,16 +336,23 @@ func _Auth_Logout_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_GetUserSessions_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(UserSessionRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _Auth_GetUserSessions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(AuthServer).GetUserSessions(m, &grpc.GenericServerStream[UserSessionRequest, UserSessionResponse]{ServerStream: stream})
+	if interceptor == nil {
+		return srv.(AuthServer).GetUserSessions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_GetUserSessions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).GetUserSessions(ctx, req.(*UserSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type Auth_GetUserSessionsServer = grpc.ServerStreamingServer[UserSessionResponse]
 
 // Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -391,13 +389,11 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "Logout",
 			Handler:    _Auth_Logout_Handler,
 		},
-	},
-	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "GetUserSessions",
-			Handler:       _Auth_GetUserSessions_Handler,
-			ServerStreams: true,
+			MethodName: "GetUserSessions",
+			Handler:    _Auth_GetUserSessions_Handler,
 		},
 	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "keycloak/keycloak.proto",
 }

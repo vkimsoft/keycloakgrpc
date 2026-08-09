@@ -17,7 +17,7 @@ service Auth {
   // IsAdmin checks whether a user is an admin.
   rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
   rpc Logout (LogoutRequest) returns (LogoutResponse);
-	rpc GetUserSessions(UserSessionRequest) returns (stream UserSessionResponse);
+	rpc GetUserSessions(UserSessionRequest) returns (UserSessionListResponse);
 }
 
 // message SetLoginRequest{
@@ -161,4 +161,7 @@ int64 lastAccess=6;
 bool rememberMe=7;
 repeated string clients=8;
 bool transientUser=9;
+}
+message UserSessionListResponse {
+    repeated UserSessionResponse items = 1;
 }
