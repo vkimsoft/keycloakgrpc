@@ -1317,7 +1317,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"rememberMe\x18\a \x01(\bR\n" +
 	"rememberMe\x12\x18\n" +
 	"\aclients\x18\b \x03(\tR\aclients\x12$\n" +
-	"\rtransientUser\x18\t \x01(\bR\rtransientUser2\xdf\x03\n" +
+	"\rtransientUser\x18\t \x01(\bR\rtransientUser2\xe1\x03\n" +
 	"\x04Auth\x12>\n" +
 	"\rClientConnect\x12\x17.auth.SetConnectRequest\x1a\x14.auth.ServerResponse\x125\n" +
 	"\tGetClient\x12\x12.auth.LoginRequest\x1a\x14.auth.ServerResponse\x120\n" +
@@ -1325,8 +1325,8 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\vGetUserInfo\x12\x15.auth.UserInfoRequest\x1a\x16.auth.UserInfoResponse\x12;\n" +
 	"\fRefreshToken\x12\x14.auth.RefreshRequest\x1a\x15.auth.RefreshResponse\x126\n" +
 	"\aIsAdmin\x12\x14.auth.IsAdminRequest\x1a\x15.auth.IsAdminResponse\x123\n" +
-	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x14.auth.LogoutResponse\x12F\n" +
-	"\x0fGetUserSessions\x12\x18.auth.UserSessionRequest\x1a\x19.auth.UserSessionResponseB:Z8vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
+	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x14.auth.LogoutResponse\x12H\n" +
+	"\x0fGetUserSessions\x12\x18.auth.UserSessionRequest\x1a\x19.auth.UserSessionResponse0\x01B:Z8vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
 
 var (
 	file_keycloak_keycloak_proto_rawDescOnce sync.Once

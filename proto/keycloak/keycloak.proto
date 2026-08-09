@@ -17,7 +17,7 @@ service Auth {
   // IsAdmin checks whether a user is an admin.
   rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
   rpc Logout (LogoutRequest) returns (LogoutResponse);
-	rpc GetUserSessions(UserSessionRequest) returns (UserSessionResponse);
+	rpc GetUserSessions(UserSessionRequest) returns (stream UserSessionResponse);
 }
 
 // message SetLoginRequest{
