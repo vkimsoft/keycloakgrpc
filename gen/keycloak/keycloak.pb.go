@@ -1110,7 +1110,7 @@ type UserSessionResponse struct {
 	Start         int64                  `protobuf:"varint,5,opt,name=start,proto3" json:"start,omitempty"`
 	LastAccess    int64                  `protobuf:"varint,6,opt,name=lastAccess,proto3" json:"lastAccess,omitempty"`
 	RememberMe    bool                   `protobuf:"varint,7,opt,name=rememberMe,proto3" json:"rememberMe,omitempty"`
-	Clients       []string               `protobuf:"bytes,8,rep,name=clients,proto3" json:"clients,omitempty"`
+	Clients       map[string]string      `protobuf:"bytes,8,rep,name=clients,proto3" json:"clients,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	TransientUser bool                   `protobuf:"varint,9,opt,name=transientUser,proto3" json:"transientUser,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1195,7 +1195,7 @@ func (x *UserSessionResponse) GetRememberMe() bool {
 	return false
 }
 
-func (x *UserSessionResponse) GetClients() []string {
+func (x *UserSessionResponse) GetClients() map[string]string {
 	if x != nil {
 		return x.Clients
 	}
@@ -1347,7 +1347,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x05realm\x18\x01 \x01(\tR\x05realm\x12\x1e\n" +
 	"\n" +
 	"clientUuid\x18\x02 \x01(\tR\n" +
-	"clientUuid\"\x8d\x02\n" +
+	"clientUuid\"\xf1\x02\n" +
 	"\x13UserSessionResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x16\n" +
@@ -1359,9 +1359,12 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"lastAccess\x12\x1e\n" +
 	"\n" +
 	"rememberMe\x18\a \x01(\bR\n" +
-	"rememberMe\x12\x18\n" +
-	"\aclients\x18\b \x03(\tR\aclients\x12$\n" +
-	"\rtransientUser\x18\t \x01(\bR\rtransientUser\"J\n" +
+	"rememberMe\x12@\n" +
+	"\aclients\x18\b \x03(\v2&.auth.UserSessionResponse.ClientsEntryR\aclients\x12$\n" +
+	"\rtransientUser\x18\t \x01(\bR\rtransientUser\x1a:\n" +
+	"\fClientsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"J\n" +
 	"\x17UserSessionListResponse\x12/\n" +
 	"\x05items\x18\x01 \x03(\v2\x19.auth.UserSessionResponseR\x05items2\xe3\x03\n" +
 	"\x04Auth\x12>\n" +
@@ -1386,7 +1389,7 @@ func file_keycloak_keycloak_proto_rawDescGZIP() []byte {
 	return file_keycloak_keycloak_proto_rawDescData
 }
 
-var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_keycloak_keycloak_proto_goTypes = []any{
 	(*IsAdminRequest)(nil),          // 0: auth.IsAdminRequest
 	(*IsAdminResponse)(nil),         // 1: auth.IsAdminResponse
@@ -1407,32 +1410,34 @@ var file_keycloak_keycloak_proto_goTypes = []any{
 	(*UserSessionResponse)(nil),     // 16: auth.UserSessionResponse
 	(*UserSessionListResponse)(nil), // 17: auth.UserSessionListResponse
 	nil,                             // 18: auth.UserInfoResponse.AttributesEntry
+	nil,                             // 19: auth.UserSessionResponse.ClientsEntry
 }
 var file_keycloak_keycloak_proto_depIdxs = []int32{
 	10, // 0: auth.ArrayOfStrings.col:type_name -> auth.RowOfStrings
 	18, // 1: auth.UserInfoResponse.Attributes:type_name -> auth.UserInfoResponse.AttributesEntry
-	16, // 2: auth.UserSessionListResponse.items:type_name -> auth.UserSessionResponse
-	6,  // 3: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
-	2,  // 4: auth.Auth.GetClient:input_type -> auth.LoginRequest
-	2,  // 5: auth.Auth.Login:input_type -> auth.LoginRequest
-	9,  // 6: auth.Auth.GetUserInfo:input_type -> auth.UserInfoRequest
-	13, // 7: auth.Auth.RefreshToken:input_type -> auth.RefreshRequest
-	0,  // 8: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
-	4,  // 9: auth.Auth.Logout:input_type -> auth.LogoutRequest
-	15, // 10: auth.Auth.GetUserSessions:input_type -> auth.UserSessionRequest
-	8,  // 11: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
-	8,  // 12: auth.Auth.GetClient:output_type -> auth.ServerResponse
-	3,  // 13: auth.Auth.Login:output_type -> auth.LoginResponse
-	12, // 14: auth.Auth.GetUserInfo:output_type -> auth.UserInfoResponse
-	14, // 15: auth.Auth.RefreshToken:output_type -> auth.RefreshResponse
-	1,  // 16: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
-	5,  // 17: auth.Auth.Logout:output_type -> auth.LogoutResponse
-	17, // 18: auth.Auth.GetUserSessions:output_type -> auth.UserSessionListResponse
-	11, // [11:19] is the sub-list for method output_type
-	3,  // [3:11] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	19, // 2: auth.UserSessionResponse.clients:type_name -> auth.UserSessionResponse.ClientsEntry
+	16, // 3: auth.UserSessionListResponse.items:type_name -> auth.UserSessionResponse
+	6,  // 4: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
+	2,  // 5: auth.Auth.GetClient:input_type -> auth.LoginRequest
+	2,  // 6: auth.Auth.Login:input_type -> auth.LoginRequest
+	9,  // 7: auth.Auth.GetUserInfo:input_type -> auth.UserInfoRequest
+	13, // 8: auth.Auth.RefreshToken:input_type -> auth.RefreshRequest
+	0,  // 9: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
+	4,  // 10: auth.Auth.Logout:input_type -> auth.LogoutRequest
+	15, // 11: auth.Auth.GetUserSessions:input_type -> auth.UserSessionRequest
+	8,  // 12: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
+	8,  // 13: auth.Auth.GetClient:output_type -> auth.ServerResponse
+	3,  // 14: auth.Auth.Login:output_type -> auth.LoginResponse
+	12, // 15: auth.Auth.GetUserInfo:output_type -> auth.UserInfoResponse
+	14, // 16: auth.Auth.RefreshToken:output_type -> auth.RefreshResponse
+	1,  // 17: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
+	5,  // 18: auth.Auth.Logout:output_type -> auth.LogoutResponse
+	17, // 19: auth.Auth.GetUserSessions:output_type -> auth.UserSessionListResponse
+	12, // [12:20] is the sub-list for method output_type
+	4,  // [4:12] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_keycloak_keycloak_proto_init() }
@@ -1447,7 +1452,7 @@ func file_keycloak_keycloak_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_keycloak_keycloak_proto_rawDesc), len(file_keycloak_keycloak_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -159,7 +159,7 @@ string ipAddress=4;
 int64 start =5;
 int64 lastAccess=6;
 bool rememberMe=7;
-repeated string clients=8;
+map<string, string> clients=8;
 bool transientUser=9;
 }
 message UserSessionListResponse {
