@@ -161,6 +161,8 @@ int64 lastAccess=6;
 bool rememberMe=7;
 map<string, string> clients=8;
 bool transientUser=9;
+string email=10;
+string names=11;
 }
 message UserSessionListResponse {
     repeated UserSessionResponse items = 1;

@@ -1112,6 +1112,8 @@ type UserSessionResponse struct {
 	RememberMe    bool                   `protobuf:"varint,7,opt,name=rememberMe,proto3" json:"rememberMe,omitempty"`
 	Clients       map[string]string      `protobuf:"bytes,8,rep,name=clients,proto3" json:"clients,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	TransientUser bool                   `protobuf:"varint,9,opt,name=transientUser,proto3" json:"transientUser,omitempty"`
+	Email         string                 `protobuf:"bytes,10,opt,name=email,proto3" json:"email,omitempty"`
+	Names         string                 `protobuf:"bytes,11,opt,name=names,proto3" json:"names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1207,6 +1209,20 @@ func (x *UserSessionResponse) GetTransientUser() bool {
 		return x.TransientUser
 	}
 	return false
+}
+
+func (x *UserSessionResponse) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *UserSessionResponse) GetNames() string {
+	if x != nil {
+		return x.Names
+	}
+	return ""
 }
 
 type UserSessionListResponse struct {
@@ -1347,7 +1363,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x05realm\x18\x01 \x01(\tR\x05realm\x12\x1e\n" +
 	"\n" +
 	"clientUuid\x18\x02 \x01(\tR\n" +
-	"clientUuid\"\xf1\x02\n" +
+	"clientUuid\"\x9d\x03\n" +
 	"\x13UserSessionResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x16\n" +
@@ -1361,7 +1377,10 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"rememberMe\x18\a \x01(\bR\n" +
 	"rememberMe\x12@\n" +
 	"\aclients\x18\b \x03(\v2&.auth.UserSessionResponse.ClientsEntryR\aclients\x12$\n" +
-	"\rtransientUser\x18\t \x01(\bR\rtransientUser\x1a:\n" +
+	"\rtransientUser\x18\t \x01(\bR\rtransientUser\x12\x14\n" +
+	"\x05email\x18\n" +
+	" \x01(\tR\x05email\x12\x14\n" +
+	"\x05names\x18\v \x01(\tR\x05names\x1a:\n" +
 	"\fClientsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"J\n" +
