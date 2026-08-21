@@ -58,6 +58,7 @@ message LoginResponse {
 	int32 NotBeforePolicy=6;
 	string SessionState=7;
 	string Scope=8;
+	UserInfoResponse UserInfo=9;
   //string token = 1; // Auth token of the logged in user.
 }
 
