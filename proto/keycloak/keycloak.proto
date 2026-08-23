@@ -23,6 +23,7 @@ service Auth {
 	rpc GetUserRoles(RoleRequest) returns (RoleListResponse);
 	rpc GetApplications(ApplicationsRequest) returns (ApplicationsResponse);
 	rpc UserApplications(ApplicationsRequest) returns (UserApplicationsResponse);
+	rpc GetUsers(UsersRequest) returns (UsersResponse);
 }
 
 // message SetLoginRequest{
@@ -232,4 +233,12 @@ message ApplicationsResponse {
 }
 message UserApplicationsResponse {
    repeated UserApplications userapplications = 1; 
+}
+
+message UsersRequest {   
+	string AccessToken = 1;  
+	string realm_id=2;
+}
+message UsersResponse {
+   repeated UserInfoResponse users = 1; 
 }
