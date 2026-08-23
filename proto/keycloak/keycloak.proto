@@ -21,6 +21,8 @@ service Auth {
 	rpc AccessLevel(ModulesRequest) returns (AccessRoleModulesResponse);
 	rpc GetRoles(RoleRequest) returns (RoleListResponse);
 	rpc GetUserRoles(RoleRequest) returns (RoleListResponse);
+	rpc GetApplications(ApplicationsRequest) returns (ApplicationsResponse);
+	rpc UserApplications(ApplicationsRequest) returns (UserApplicationsResponse);
 }
 
 // message SetLoginRequest{
@@ -205,4 +207,29 @@ message RoleResponse {
 }
 message RoleListResponse {
     repeated RoleResponse roles = 1;
+}
+
+message ApplicationsRequest {   
+	string AccessToken = 1;  
+	string id=2;
+	string realm_id=3;
+}
+
+message Applications {   
+ int32 id=1;        
+ string title=3;
+ string url=4;
+ bool enabled=5;
+ string action=6;
+}
+message UserApplications {  
+ string user_id=1;   
+ Applications application=2;
+}
+
+message ApplicationsResponse {
+	repeated Applications applications = 1; 
+}
+message UserApplicationsResponse {
+   repeated UserApplications userapplications = 1; 
 }

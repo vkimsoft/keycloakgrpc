@@ -19,17 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Auth_ClientConnect_FullMethodName   = "/auth.Auth/ClientConnect"
-	Auth_GetClient_FullMethodName       = "/auth.Auth/GetClient"
-	Auth_Login_FullMethodName           = "/auth.Auth/Login"
-	Auth_GetUserInfo_FullMethodName     = "/auth.Auth/GetUserInfo"
-	Auth_RefreshToken_FullMethodName    = "/auth.Auth/RefreshToken"
-	Auth_IsAdmin_FullMethodName         = "/auth.Auth/IsAdmin"
-	Auth_Logout_FullMethodName          = "/auth.Auth/Logout"
-	Auth_GetUserSessions_FullMethodName = "/auth.Auth/GetUserSessions"
-	Auth_AccessLevel_FullMethodName     = "/auth.Auth/AccessLevel"
-	Auth_GetRoles_FullMethodName        = "/auth.Auth/GetRoles"
-	Auth_GetUserRoles_FullMethodName    = "/auth.Auth/GetUserRoles"
+	Auth_ClientConnect_FullMethodName    = "/auth.Auth/ClientConnect"
+	Auth_GetClient_FullMethodName        = "/auth.Auth/GetClient"
+	Auth_Login_FullMethodName            = "/auth.Auth/Login"
+	Auth_GetUserInfo_FullMethodName      = "/auth.Auth/GetUserInfo"
+	Auth_RefreshToken_FullMethodName     = "/auth.Auth/RefreshToken"
+	Auth_IsAdmin_FullMethodName          = "/auth.Auth/IsAdmin"
+	Auth_Logout_FullMethodName           = "/auth.Auth/Logout"
+	Auth_GetUserSessions_FullMethodName  = "/auth.Auth/GetUserSessions"
+	Auth_AccessLevel_FullMethodName      = "/auth.Auth/AccessLevel"
+	Auth_GetRoles_FullMethodName         = "/auth.Auth/GetRoles"
+	Auth_GetUserRoles_FullMethodName     = "/auth.Auth/GetUserRoles"
+	Auth_GetApplications_FullMethodName  = "/auth.Auth/GetApplications"
+	Auth_UserApplications_FullMethodName = "/auth.Auth/UserApplications"
 )
 
 // AuthClient is the client API for Auth service.
@@ -53,6 +55,8 @@ type AuthClient interface {
 	AccessLevel(ctx context.Context, in *ModulesRequest, opts ...grpc.CallOption) (*AccessRoleModulesResponse, error)
 	GetRoles(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleListResponse, error)
 	GetUserRoles(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleListResponse, error)
+	GetApplications(ctx context.Context, in *ApplicationsRequest, opts ...grpc.CallOption) (*ApplicationsResponse, error)
+	UserApplications(ctx context.Context, in *ApplicationsRequest, opts ...grpc.CallOption) (*UserApplicationsResponse, error)
 }
 
 type authClient struct {
@@ -173,6 +177,26 @@ func (c *authClient) GetUserRoles(ctx context.Context, in *RoleRequest, opts ...
 	return out, nil
 }
 
+func (c *authClient) GetApplications(ctx context.Context, in *ApplicationsRequest, opts ...grpc.CallOption) (*ApplicationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApplicationsResponse)
+	err := c.cc.Invoke(ctx, Auth_GetApplications_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) UserApplications(ctx context.Context, in *ApplicationsRequest, opts ...grpc.CallOption) (*UserApplicationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserApplicationsResponse)
+	err := c.cc.Invoke(ctx, Auth_UserApplications_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServer is the server API for Auth service.
 // All implementations must embed UnimplementedAuthServer
 // for forward compatibility.
@@ -194,6 +218,8 @@ type AuthServer interface {
 	AccessLevel(context.Context, *ModulesRequest) (*AccessRoleModulesResponse, error)
 	GetRoles(context.Context, *RoleRequest) (*RoleListResponse, error)
 	GetUserRoles(context.Context, *RoleRequest) (*RoleListResponse, error)
+	GetApplications(context.Context, *ApplicationsRequest) (*ApplicationsResponse, error)
+	UserApplications(context.Context, *ApplicationsRequest) (*UserApplicationsResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -236,6 +262,12 @@ func (UnimplementedAuthServer) GetRoles(context.Context, *RoleRequest) (*RoleLis
 }
 func (UnimplementedAuthServer) GetUserRoles(context.Context, *RoleRequest) (*RoleListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserRoles not implemented")
+}
+func (UnimplementedAuthServer) GetApplications(context.Context, *ApplicationsRequest) (*ApplicationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetApplications not implemented")
+}
+func (UnimplementedAuthServer) UserApplications(context.Context, *ApplicationsRequest) (*UserApplicationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserApplications not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 func (UnimplementedAuthServer) testEmbeddedByValue()              {}
@@ -456,6 +488,42 @@ func _Auth_GetUserRoles_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Auth_GetApplications_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApplicationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).GetApplications(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_GetApplications_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).GetApplications(ctx, req.(*ApplicationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_UserApplications_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApplicationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).UserApplications(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_UserApplications_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).UserApplications(ctx, req.(*ApplicationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -506,6 +574,14 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserRoles",
 			Handler:    _Auth_GetUserRoles_Handler,
+		},
+		{
+			MethodName: "GetApplications",
+			Handler:    _Auth_GetApplications_Handler,
+		},
+		{
+			MethodName: "UserApplications",
+			Handler:    _Auth_UserApplications_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
