@@ -27,6 +27,9 @@ const (
 	Auth_IsAdmin_FullMethodName         = "/auth.Auth/IsAdmin"
 	Auth_Logout_FullMethodName          = "/auth.Auth/Logout"
 	Auth_GetUserSessions_FullMethodName = "/auth.Auth/GetUserSessions"
+	Auth_AccessLevel_FullMethodName     = "/auth.Auth/AccessLevel"
+	Auth_GetRoles_FullMethodName        = "/auth.Auth/GetRoles"
+	Auth_GetRole_FullMethodName         = "/auth.Auth/GetRole"
 )
 
 // AuthClient is the client API for Auth service.
@@ -47,6 +50,9 @@ type AuthClient interface {
 	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	GetUserSessions(ctx context.Context, in *UserSessionRequest, opts ...grpc.CallOption) (*UserSessionListResponse, error)
+	AccessLevel(ctx context.Context, in *ModulesRequest, opts ...grpc.CallOption) (*AccessRoleModulesResponse, error)
+	GetRoles(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleListResponse, error)
+	GetRole(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleResponse, error)
 }
 
 type authClient struct {
@@ -137,6 +143,36 @@ func (c *authClient) GetUserSessions(ctx context.Context, in *UserSessionRequest
 	return out, nil
 }
 
+func (c *authClient) AccessLevel(ctx context.Context, in *ModulesRequest, opts ...grpc.CallOption) (*AccessRoleModulesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AccessRoleModulesResponse)
+	err := c.cc.Invoke(ctx, Auth_AccessLevel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) GetRoles(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RoleListResponse)
+	err := c.cc.Invoke(ctx, Auth_GetRoles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) GetRole(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RoleResponse)
+	err := c.cc.Invoke(ctx, Auth_GetRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServer is the server API for Auth service.
 // All implementations must embed UnimplementedAuthServer
 // for forward compatibility.
@@ -155,6 +191,9 @@ type AuthServer interface {
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	GetUserSessions(context.Context, *UserSessionRequest) (*UserSessionListResponse, error)
+	AccessLevel(context.Context, *ModulesRequest) (*AccessRoleModulesResponse, error)
+	GetRoles(context.Context, *RoleRequest) (*RoleListResponse, error)
+	GetRole(context.Context, *RoleRequest) (*RoleResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -188,6 +227,15 @@ func (UnimplementedAuthServer) Logout(context.Context, *LogoutRequest) (*LogoutR
 }
 func (UnimplementedAuthServer) GetUserSessions(context.Context, *UserSessionRequest) (*UserSessionListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserSessions not implemented")
+}
+func (UnimplementedAuthServer) AccessLevel(context.Context, *ModulesRequest) (*AccessRoleModulesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AccessLevel not implemented")
+}
+func (UnimplementedAuthServer) GetRoles(context.Context, *RoleRequest) (*RoleListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRoles not implemented")
+}
+func (UnimplementedAuthServer) GetRole(context.Context, *RoleRequest) (*RoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRole not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 func (UnimplementedAuthServer) testEmbeddedByValue()              {}
@@ -354,6 +402,60 @@ func _Auth_GetUserSessions_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Auth_AccessLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModulesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).AccessLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_AccessLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).AccessLevel(ctx, req.(*ModulesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_GetRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).GetRoles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_GetRoles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).GetRoles(ctx, req.(*RoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_GetRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).GetRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_GetRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).GetRole(ctx, req.(*RoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -392,6 +494,18 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserSessions",
 			Handler:    _Auth_GetUserSessions_Handler,
+		},
+		{
+			MethodName: "AccessLevel",
+			Handler:    _Auth_AccessLevel_Handler,
+		},
+		{
+			MethodName: "GetRoles",
+			Handler:    _Auth_GetRoles_Handler,
+		},
+		{
+			MethodName: "GetRole",
+			Handler:    _Auth_GetRole_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

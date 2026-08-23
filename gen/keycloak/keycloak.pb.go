@@ -1235,7 +1235,7 @@ func (x *UserSessionResponse) GetNames() string {
 
 type UserSessionListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Items         []*UserSessionResponse `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Sessions      []*UserSessionResponse `protobuf:"bytes,1,rep,name=sessions,proto3" json:"sessions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1270,9 +1270,393 @@ func (*UserSessionListResponse) Descriptor() ([]byte, []int) {
 	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *UserSessionListResponse) GetItems() []*UserSessionResponse {
+func (x *UserSessionListResponse) GetSessions() []*UserSessionResponse {
 	if x != nil {
-		return x.Items
+		return x.Sessions
+	}
+	return nil
+}
+
+type Modules struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ModuleName    string                 `protobuf:"bytes,1,opt,name=moduleName,proto3" json:"moduleName,omitempty"`
+	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	IsActive      bool                   `protobuf:"varint,3,opt,name=isActive,proto3" json:"isActive,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Modules) Reset() {
+	*x = Modules{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Modules) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Modules) ProtoMessage() {}
+
+func (x *Modules) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Modules.ProtoReflect.Descriptor instead.
+func (*Modules) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *Modules) GetModuleName() string {
+	if x != nil {
+		return x.ModuleName
+	}
+	return ""
+}
+
+func (x *Modules) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *Modules) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+type ModulesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=AccessToken,proto3" json:"AccessToken,omitempty"`
+	ModuleName    string                 `protobuf:"bytes,2,opt,name=moduleName,proto3" json:"moduleName,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ModulesRequest) Reset() {
+	*x = ModulesRequest{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ModulesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ModulesRequest) ProtoMessage() {}
+
+func (x *ModulesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ModulesRequest.ProtoReflect.Descriptor instead.
+func (*ModulesRequest) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ModulesRequest) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *ModulesRequest) GetModuleName() string {
+	if x != nil {
+		return x.ModuleName
+	}
+	return ""
+}
+
+type AccessRoleModulesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RoleName      string                 `protobuf:"bytes,1,opt,name=roleName,proto3" json:"roleName,omitempty"`
+	ModuleName    *Modules               `protobuf:"bytes,2,opt,name=moduleName,proto3" json:"moduleName,omitempty"`
+	Level         int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
+	IsActive      bool                   `protobuf:"varint,4,opt,name=isActive,proto3" json:"isActive,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccessRoleModulesResponse) Reset() {
+	*x = AccessRoleModulesResponse{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccessRoleModulesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccessRoleModulesResponse) ProtoMessage() {}
+
+func (x *AccessRoleModulesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccessRoleModulesResponse.ProtoReflect.Descriptor instead.
+func (*AccessRoleModulesResponse) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *AccessRoleModulesResponse) GetRoleName() string {
+	if x != nil {
+		return x.RoleName
+	}
+	return ""
+}
+
+func (x *AccessRoleModulesResponse) GetModuleName() *Modules {
+	if x != nil {
+		return x.ModuleName
+	}
+	return nil
+}
+
+func (x *AccessRoleModulesResponse) GetLevel() int32 {
+	if x != nil {
+		return x.Level
+	}
+	return 0
+}
+
+func (x *AccessRoleModulesResponse) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+type RoleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=AccessToken,proto3" json:"AccessToken,omitempty"`
+	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	RealmId       string                 `protobuf:"bytes,4,opt,name=realm_id,json=realmId,proto3" json:"realm_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoleRequest) Reset() {
+	*x = RoleRequest{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoleRequest) ProtoMessage() {}
+
+func (x *RoleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoleRequest.ProtoReflect.Descriptor instead.
+func (*RoleRequest) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *RoleRequest) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *RoleRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *RoleRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *RoleRequest) GetRealmId() string {
+	if x != nil {
+		return x.RealmId
+	}
+	return ""
+}
+
+type RoleResponse struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Id                    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ClientRealmConstraint string                 `protobuf:"bytes,2,opt,name=client_realm_constraint,json=clientRealmConstraint,proto3" json:"client_realm_constraint,omitempty"`
+	ClientRole            bool                   `protobuf:"varint,3,opt,name=client_role,json=clientRole,proto3" json:"client_role,omitempty"`
+	Description           string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Name                  string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	RealmId               string                 `protobuf:"bytes,6,opt,name=realm_id,json=realmId,proto3" json:"realm_id,omitempty"`
+	Client                string                 `protobuf:"bytes,7,opt,name=client,proto3" json:"client,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *RoleResponse) Reset() {
+	*x = RoleResponse{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoleResponse) ProtoMessage() {}
+
+func (x *RoleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoleResponse.ProtoReflect.Descriptor instead.
+func (*RoleResponse) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *RoleResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *RoleResponse) GetClientRealmConstraint() string {
+	if x != nil {
+		return x.ClientRealmConstraint
+	}
+	return ""
+}
+
+func (x *RoleResponse) GetClientRole() bool {
+	if x != nil {
+		return x.ClientRole
+	}
+	return false
+}
+
+func (x *RoleResponse) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *RoleResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *RoleResponse) GetRealmId() string {
+	if x != nil {
+		return x.RealmId
+	}
+	return ""
+}
+
+func (x *RoleResponse) GetClient() string {
+	if x != nil {
+		return x.Client
+	}
+	return ""
+}
+
+type RoleListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Roles         []*RoleResponse        `protobuf:"bytes,1,rep,name=roles,proto3" json:"roles,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoleListResponse) Reset() {
+	*x = RoleListResponse{}
+	mi := &file_keycloak_keycloak_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoleListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoleListResponse) ProtoMessage() {}
+
+func (x *RoleListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_keycloak_keycloak_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoleListResponse.ProtoReflect.Descriptor instead.
+func (*RoleListResponse) Descriptor() ([]byte, []int) {
+	return file_keycloak_keycloak_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *RoleListResponse) GetRoles() []*RoleResponse {
+	if x != nil {
+		return x.Roles
 	}
 	return nil
 }
@@ -1392,9 +1776,43 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x05names\x18\v \x01(\tR\x05names\x1a:\n" +
 	"\fClientsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"J\n" +
-	"\x17UserSessionListResponse\x12/\n" +
-	"\x05items\x18\x01 \x03(\v2\x19.auth.UserSessionResponseR\x05items2\xe3\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"P\n" +
+	"\x17UserSessionListResponse\x125\n" +
+	"\bsessions\x18\x01 \x03(\v2\x19.auth.UserSessionResponseR\bsessions\"g\n" +
+	"\aModules\x12\x1e\n" +
+	"\n" +
+	"moduleName\x18\x01 \x01(\tR\n" +
+	"moduleName\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1a\n" +
+	"\bisActive\x18\x03 \x01(\bR\bisActive\"R\n" +
+	"\x0eModulesRequest\x12 \n" +
+	"\vAccessToken\x18\x01 \x01(\tR\vAccessToken\x12\x1e\n" +
+	"\n" +
+	"moduleName\x18\x02 \x01(\tR\n" +
+	"moduleName\"\x98\x01\n" +
+	"\x19AccessRoleModulesResponse\x12\x1a\n" +
+	"\broleName\x18\x01 \x01(\tR\broleName\x12-\n" +
+	"\n" +
+	"moduleName\x18\x02 \x01(\v2\r.auth.ModulesR\n" +
+	"moduleName\x12\x14\n" +
+	"\x05level\x18\x03 \x01(\x05R\x05level\x12\x1a\n" +
+	"\bisActive\x18\x04 \x01(\bR\bisActive\"|\n" +
+	"\vRoleRequest\x12 \n" +
+	"\vAccessToken\x18\x01 \x01(\tR\vAccessToken\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x19\n" +
+	"\brealm_id\x18\x04 \x01(\tR\arealmId\"\xe0\x01\n" +
+	"\fRoleResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x126\n" +
+	"\x17client_realm_constraint\x18\x02 \x01(\tR\x15clientRealmConstraint\x12\x1f\n" +
+	"\vclient_role\x18\x03 \x01(\bR\n" +
+	"clientRole\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x12\n" +
+	"\x04name\x18\x05 \x01(\tR\x04name\x12\x19\n" +
+	"\brealm_id\x18\x06 \x01(\tR\arealmId\x12\x16\n" +
+	"\x06client\x18\a \x01(\tR\x06client\"<\n" +
+	"\x10RoleListResponse\x12(\n" +
+	"\x05roles\x18\x01 \x03(\v2\x12.auth.RoleResponseR\x05roles2\x92\x05\n" +
 	"\x04Auth\x12>\n" +
 	"\rClientConnect\x12\x17.auth.SetConnectRequest\x1a\x14.auth.ServerResponse\x125\n" +
 	"\tGetClient\x12\x12.auth.LoginRequest\x1a\x14.auth.ServerResponse\x120\n" +
@@ -1403,7 +1821,10 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\fRefreshToken\x12\x14.auth.RefreshRequest\x1a\x15.auth.RefreshResponse\x126\n" +
 	"\aIsAdmin\x12\x14.auth.IsAdminRequest\x1a\x15.auth.IsAdminResponse\x123\n" +
 	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x14.auth.LogoutResponse\x12J\n" +
-	"\x0fGetUserSessions\x12\x18.auth.UserSessionRequest\x1a\x1d.auth.UserSessionListResponseB:Z8vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
+	"\x0fGetUserSessions\x12\x18.auth.UserSessionRequest\x1a\x1d.auth.UserSessionListResponse\x12D\n" +
+	"\vAccessLevel\x12\x14.auth.ModulesRequest\x1a\x1f.auth.AccessRoleModulesResponse\x125\n" +
+	"\bGetRoles\x12\x11.auth.RoleRequest\x1a\x16.auth.RoleListResponse\x120\n" +
+	"\aGetRole\x12\x11.auth.RoleRequest\x1a\x12.auth.RoleResponseB:Z8vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
 
 var (
 	file_keycloak_keycloak_proto_rawDescOnce sync.Once
@@ -1417,56 +1838,70 @@ func file_keycloak_keycloak_proto_rawDescGZIP() []byte {
 	return file_keycloak_keycloak_proto_rawDescData
 }
 
-var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_keycloak_keycloak_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_keycloak_keycloak_proto_goTypes = []any{
-	(*IsAdminRequest)(nil),          // 0: auth.IsAdminRequest
-	(*IsAdminResponse)(nil),         // 1: auth.IsAdminResponse
-	(*LoginRequest)(nil),            // 2: auth.LoginRequest
-	(*LoginResponse)(nil),           // 3: auth.LoginResponse
-	(*LogoutRequest)(nil),           // 4: auth.LogoutRequest
-	(*LogoutResponse)(nil),          // 5: auth.LogoutResponse
-	(*SetConnectRequest)(nil),       // 6: auth.SetConnectRequest
-	(*GetRequest)(nil),              // 7: auth.GetRequest
-	(*ServerResponse)(nil),          // 8: auth.ServerResponse
-	(*UserInfoRequest)(nil),         // 9: auth.UserInfoRequest
-	(*RowOfStrings)(nil),            // 10: auth.RowOfStrings
-	(*ArrayOfStrings)(nil),          // 11: auth.ArrayOfStrings
-	(*UserInfoResponse)(nil),        // 12: auth.UserInfoResponse
-	(*RefreshRequest)(nil),          // 13: auth.RefreshRequest
-	(*RefreshResponse)(nil),         // 14: auth.RefreshResponse
-	(*UserSessionRequest)(nil),      // 15: auth.UserSessionRequest
-	(*UserSessionResponse)(nil),     // 16: auth.UserSessionResponse
-	(*UserSessionListResponse)(nil), // 17: auth.UserSessionListResponse
-	nil,                             // 18: auth.UserInfoResponse.AttributesEntry
-	nil,                             // 19: auth.UserSessionResponse.ClientsEntry
+	(*IsAdminRequest)(nil),            // 0: auth.IsAdminRequest
+	(*IsAdminResponse)(nil),           // 1: auth.IsAdminResponse
+	(*LoginRequest)(nil),              // 2: auth.LoginRequest
+	(*LoginResponse)(nil),             // 3: auth.LoginResponse
+	(*LogoutRequest)(nil),             // 4: auth.LogoutRequest
+	(*LogoutResponse)(nil),            // 5: auth.LogoutResponse
+	(*SetConnectRequest)(nil),         // 6: auth.SetConnectRequest
+	(*GetRequest)(nil),                // 7: auth.GetRequest
+	(*ServerResponse)(nil),            // 8: auth.ServerResponse
+	(*UserInfoRequest)(nil),           // 9: auth.UserInfoRequest
+	(*RowOfStrings)(nil),              // 10: auth.RowOfStrings
+	(*ArrayOfStrings)(nil),            // 11: auth.ArrayOfStrings
+	(*UserInfoResponse)(nil),          // 12: auth.UserInfoResponse
+	(*RefreshRequest)(nil),            // 13: auth.RefreshRequest
+	(*RefreshResponse)(nil),           // 14: auth.RefreshResponse
+	(*UserSessionRequest)(nil),        // 15: auth.UserSessionRequest
+	(*UserSessionResponse)(nil),       // 16: auth.UserSessionResponse
+	(*UserSessionListResponse)(nil),   // 17: auth.UserSessionListResponse
+	(*Modules)(nil),                   // 18: auth.Modules
+	(*ModulesRequest)(nil),            // 19: auth.ModulesRequest
+	(*AccessRoleModulesResponse)(nil), // 20: auth.AccessRoleModulesResponse
+	(*RoleRequest)(nil),               // 21: auth.RoleRequest
+	(*RoleResponse)(nil),              // 22: auth.RoleResponse
+	(*RoleListResponse)(nil),          // 23: auth.RoleListResponse
+	nil,                               // 24: auth.UserInfoResponse.AttributesEntry
+	nil,                               // 25: auth.UserSessionResponse.ClientsEntry
 }
 var file_keycloak_keycloak_proto_depIdxs = []int32{
 	12, // 0: auth.LoginResponse.UserInfo:type_name -> auth.UserInfoResponse
 	10, // 1: auth.ArrayOfStrings.col:type_name -> auth.RowOfStrings
-	18, // 2: auth.UserInfoResponse.Attributes:type_name -> auth.UserInfoResponse.AttributesEntry
-	19, // 3: auth.UserSessionResponse.clients:type_name -> auth.UserSessionResponse.ClientsEntry
-	16, // 4: auth.UserSessionListResponse.items:type_name -> auth.UserSessionResponse
-	6,  // 5: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
-	2,  // 6: auth.Auth.GetClient:input_type -> auth.LoginRequest
-	2,  // 7: auth.Auth.Login:input_type -> auth.LoginRequest
-	9,  // 8: auth.Auth.GetUserInfo:input_type -> auth.UserInfoRequest
-	13, // 9: auth.Auth.RefreshToken:input_type -> auth.RefreshRequest
-	0,  // 10: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
-	4,  // 11: auth.Auth.Logout:input_type -> auth.LogoutRequest
-	15, // 12: auth.Auth.GetUserSessions:input_type -> auth.UserSessionRequest
-	8,  // 13: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
-	8,  // 14: auth.Auth.GetClient:output_type -> auth.ServerResponse
-	3,  // 15: auth.Auth.Login:output_type -> auth.LoginResponse
-	12, // 16: auth.Auth.GetUserInfo:output_type -> auth.UserInfoResponse
-	14, // 17: auth.Auth.RefreshToken:output_type -> auth.RefreshResponse
-	1,  // 18: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
-	5,  // 19: auth.Auth.Logout:output_type -> auth.LogoutResponse
-	17, // 20: auth.Auth.GetUserSessions:output_type -> auth.UserSessionListResponse
-	13, // [13:21] is the sub-list for method output_type
-	5,  // [5:13] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	24, // 2: auth.UserInfoResponse.Attributes:type_name -> auth.UserInfoResponse.AttributesEntry
+	25, // 3: auth.UserSessionResponse.clients:type_name -> auth.UserSessionResponse.ClientsEntry
+	16, // 4: auth.UserSessionListResponse.sessions:type_name -> auth.UserSessionResponse
+	18, // 5: auth.AccessRoleModulesResponse.moduleName:type_name -> auth.Modules
+	22, // 6: auth.RoleListResponse.roles:type_name -> auth.RoleResponse
+	6,  // 7: auth.Auth.ClientConnect:input_type -> auth.SetConnectRequest
+	2,  // 8: auth.Auth.GetClient:input_type -> auth.LoginRequest
+	2,  // 9: auth.Auth.Login:input_type -> auth.LoginRequest
+	9,  // 10: auth.Auth.GetUserInfo:input_type -> auth.UserInfoRequest
+	13, // 11: auth.Auth.RefreshToken:input_type -> auth.RefreshRequest
+	0,  // 12: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
+	4,  // 13: auth.Auth.Logout:input_type -> auth.LogoutRequest
+	15, // 14: auth.Auth.GetUserSessions:input_type -> auth.UserSessionRequest
+	19, // 15: auth.Auth.AccessLevel:input_type -> auth.ModulesRequest
+	21, // 16: auth.Auth.GetRoles:input_type -> auth.RoleRequest
+	21, // 17: auth.Auth.GetRole:input_type -> auth.RoleRequest
+	8,  // 18: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
+	8,  // 19: auth.Auth.GetClient:output_type -> auth.ServerResponse
+	3,  // 20: auth.Auth.Login:output_type -> auth.LoginResponse
+	12, // 21: auth.Auth.GetUserInfo:output_type -> auth.UserInfoResponse
+	14, // 22: auth.Auth.RefreshToken:output_type -> auth.RefreshResponse
+	1,  // 23: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
+	5,  // 24: auth.Auth.Logout:output_type -> auth.LogoutResponse
+	17, // 25: auth.Auth.GetUserSessions:output_type -> auth.UserSessionListResponse
+	20, // 26: auth.Auth.AccessLevel:output_type -> auth.AccessRoleModulesResponse
+	23, // 27: auth.Auth.GetRoles:output_type -> auth.RoleListResponse
+	22, // 28: auth.Auth.GetRole:output_type -> auth.RoleResponse
+	18, // [18:29] is the sub-list for method output_type
+	7,  // [7:18] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_keycloak_keycloak_proto_init() }
@@ -1481,7 +1916,7 @@ func file_keycloak_keycloak_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_keycloak_keycloak_proto_rawDesc), len(file_keycloak_keycloak_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

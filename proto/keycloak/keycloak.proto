@@ -18,6 +18,9 @@ service Auth {
   rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
   rpc Logout (LogoutRequest) returns (LogoutResponse);
 	rpc GetUserSessions(UserSessionRequest) returns (UserSessionListResponse);
+	rpc AccessLevel(ModulesRequest) returns (AccessRoleModulesResponse);
+	rpc GetRoles(RoleRequest) returns (RoleListResponse);
+	rpc GetRole(RoleRequest) returns (RoleResponse);
 }
 
 // message SetLoginRequest{
@@ -148,8 +151,8 @@ message RefreshResponse {
 }
 
 message UserSessionRequest {
-		string realm=1;
-		string clientUuid=2;
+	string realm=1;
+	string clientUuid=2;
 }
 
 message UserSessionResponse {
@@ -166,5 +169,40 @@ string email=10;
 string names=11;
 }
 message UserSessionListResponse {
-    repeated UserSessionResponse items = 1;
+    repeated UserSessionResponse sessions = 1;
+}
+
+message Modules{
+  string moduleName=1;
+  string description=2;
+  bool isActive=3;
+}
+message ModulesRequest{
+	string AccessToken = 1;  
+  string moduleName=2;
+}
+
+message AccessRoleModulesResponse {    
+ string roleName=1;
+ Modules moduleName=2;
+ int32 level=3;
+ bool isActive=4;
+}
+message RoleRequest{
+	string AccessToken = 1;  
+	string id=2;
+	string description=3;
+	string realm_id=4;
+}
+message RoleResponse {
+ string id=1;
+ string client_realm_constraint=2;
+ bool client_role=3;
+ string description=4;
+ string name=5;
+ string realm_id=6;
+ string client=7;
+}
+message RoleListResponse {
+    repeated RoleResponse roles = 1;
 }
