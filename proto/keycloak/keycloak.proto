@@ -20,7 +20,7 @@ service Auth {
 	rpc GetUserSessions(UserSessionRequest) returns (UserSessionListResponse);
 	rpc AccessLevel(ModulesRequest) returns (AccessRoleModulesResponse);
 	rpc GetRoles(RoleRequest) returns (RoleListResponse);
-	rpc GetRole(RoleRequest) returns (RoleResponse);
+	rpc GetUserRoles(RoleRequest) returns (RoleListResponse);
 }
 
 // message SetLoginRequest{

@@ -1812,7 +1812,7 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\brealm_id\x18\x06 \x01(\tR\arealmId\x12\x16\n" +
 	"\x06client\x18\a \x01(\tR\x06client\"<\n" +
 	"\x10RoleListResponse\x12(\n" +
-	"\x05roles\x18\x01 \x03(\v2\x12.auth.RoleResponseR\x05roles2\x92\x05\n" +
+	"\x05roles\x18\x01 \x03(\v2\x12.auth.RoleResponseR\x05roles2\x9b\x05\n" +
 	"\x04Auth\x12>\n" +
 	"\rClientConnect\x12\x17.auth.SetConnectRequest\x1a\x14.auth.ServerResponse\x125\n" +
 	"\tGetClient\x12\x12.auth.LoginRequest\x1a\x14.auth.ServerResponse\x120\n" +
@@ -1823,8 +1823,8 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x14.auth.LogoutResponse\x12J\n" +
 	"\x0fGetUserSessions\x12\x18.auth.UserSessionRequest\x1a\x1d.auth.UserSessionListResponse\x12D\n" +
 	"\vAccessLevel\x12\x14.auth.ModulesRequest\x1a\x1f.auth.AccessRoleModulesResponse\x125\n" +
-	"\bGetRoles\x12\x11.auth.RoleRequest\x1a\x16.auth.RoleListResponse\x120\n" +
-	"\aGetRole\x12\x11.auth.RoleRequest\x1a\x12.auth.RoleResponseB:Z8vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
+	"\bGetRoles\x12\x11.auth.RoleRequest\x1a\x16.auth.RoleListResponse\x129\n" +
+	"\fGetUserRoles\x12\x11.auth.RoleRequest\x1a\x16.auth.RoleListResponseB:Z8vkimsoft/keycloakgrpc/protos/gen/keycloak;keycloackprotob\x06proto3"
 
 var (
 	file_keycloak_keycloak_proto_rawDescOnce sync.Once
@@ -1885,7 +1885,7 @@ var file_keycloak_keycloak_proto_depIdxs = []int32{
 	15, // 14: auth.Auth.GetUserSessions:input_type -> auth.UserSessionRequest
 	19, // 15: auth.Auth.AccessLevel:input_type -> auth.ModulesRequest
 	21, // 16: auth.Auth.GetRoles:input_type -> auth.RoleRequest
-	21, // 17: auth.Auth.GetRole:input_type -> auth.RoleRequest
+	21, // 17: auth.Auth.GetUserRoles:input_type -> auth.RoleRequest
 	8,  // 18: auth.Auth.ClientConnect:output_type -> auth.ServerResponse
 	8,  // 19: auth.Auth.GetClient:output_type -> auth.ServerResponse
 	3,  // 20: auth.Auth.Login:output_type -> auth.LoginResponse
@@ -1896,7 +1896,7 @@ var file_keycloak_keycloak_proto_depIdxs = []int32{
 	17, // 25: auth.Auth.GetUserSessions:output_type -> auth.UserSessionListResponse
 	20, // 26: auth.Auth.AccessLevel:output_type -> auth.AccessRoleModulesResponse
 	23, // 27: auth.Auth.GetRoles:output_type -> auth.RoleListResponse
-	22, // 28: auth.Auth.GetRole:output_type -> auth.RoleResponse
+	23, // 28: auth.Auth.GetUserRoles:output_type -> auth.RoleListResponse
 	18, // [18:29] is the sub-list for method output_type
 	7,  // [7:18] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name

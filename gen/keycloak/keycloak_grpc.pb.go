@@ -29,7 +29,7 @@ const (
 	Auth_GetUserSessions_FullMethodName = "/auth.Auth/GetUserSessions"
 	Auth_AccessLevel_FullMethodName     = "/auth.Auth/AccessLevel"
 	Auth_GetRoles_FullMethodName        = "/auth.Auth/GetRoles"
-	Auth_GetRole_FullMethodName         = "/auth.Auth/GetRole"
+	Auth_GetUserRoles_FullMethodName    = "/auth.Auth/GetUserRoles"
 )
 
 // AuthClient is the client API for Auth service.
@@ -52,7 +52,7 @@ type AuthClient interface {
 	GetUserSessions(ctx context.Context, in *UserSessionRequest, opts ...grpc.CallOption) (*UserSessionListResponse, error)
 	AccessLevel(ctx context.Context, in *ModulesRequest, opts ...grpc.CallOption) (*AccessRoleModulesResponse, error)
 	GetRoles(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleListResponse, error)
-	GetRole(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleResponse, error)
+	GetUserRoles(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleListResponse, error)
 }
 
 type authClient struct {
@@ -163,10 +163,10 @@ func (c *authClient) GetRoles(ctx context.Context, in *RoleRequest, opts ...grpc
 	return out, nil
 }
 
-func (c *authClient) GetRole(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleResponse, error) {
+func (c *authClient) GetUserRoles(ctx context.Context, in *RoleRequest, opts ...grpc.CallOption) (*RoleListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RoleResponse)
-	err := c.cc.Invoke(ctx, Auth_GetRole_FullMethodName, in, out, cOpts...)
+	out := new(RoleListResponse)
+	err := c.cc.Invoke(ctx, Auth_GetUserRoles_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -193,7 +193,7 @@ type AuthServer interface {
 	GetUserSessions(context.Context, *UserSessionRequest) (*UserSessionListResponse, error)
 	AccessLevel(context.Context, *ModulesRequest) (*AccessRoleModulesResponse, error)
 	GetRoles(context.Context, *RoleRequest) (*RoleListResponse, error)
-	GetRole(context.Context, *RoleRequest) (*RoleResponse, error)
+	GetUserRoles(context.Context, *RoleRequest) (*RoleListResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -234,8 +234,8 @@ func (UnimplementedAuthServer) AccessLevel(context.Context, *ModulesRequest) (*A
 func (UnimplementedAuthServer) GetRoles(context.Context, *RoleRequest) (*RoleListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRoles not implemented")
 }
-func (UnimplementedAuthServer) GetRole(context.Context, *RoleRequest) (*RoleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRole not implemented")
+func (UnimplementedAuthServer) GetUserRoles(context.Context, *RoleRequest) (*RoleListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserRoles not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 func (UnimplementedAuthServer) testEmbeddedByValue()              {}
@@ -438,20 +438,20 @@ func _Auth_GetRoles_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_GetRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Auth_GetUserRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RoleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServer).GetRole(ctx, in)
+		return srv.(AuthServer).GetUserRoles(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Auth_GetRole_FullMethodName,
+		FullMethod: Auth_GetUserRoles_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).GetRole(ctx, req.(*RoleRequest))
+		return srv.(AuthServer).GetUserRoles(ctx, req.(*RoleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -504,8 +504,8 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Auth_GetRoles_Handler,
 		},
 		{
-			MethodName: "GetRole",
-			Handler:    _Auth_GetRole_Handler,
+			MethodName: "GetUserRoles",
+			Handler:    _Auth_GetUserRoles_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
