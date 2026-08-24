@@ -1390,11 +1390,11 @@ func (x *ModulesRequest) GetModuleName() string {
 }
 
 type AccessRoleModules struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	RoleName string                 `protobuf:"bytes,1,opt,name=roleName,proto3" json:"roleName,omitempty"`
-	// Modules moduleName=2;
-	Level         int32 `protobuf:"varint,2,opt,name=level,proto3" json:"level,omitempty"`
-	IsActive      bool  `protobuf:"varint,3,opt,name=isActive,proto3" json:"isActive,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RoleName      string                 `protobuf:"bytes,1,opt,name=roleName,proto3" json:"roleName,omitempty"`
+	ModuleName    string                 `protobuf:"bytes,2,opt,name=moduleName,proto3" json:"moduleName,omitempty"`
+	Level         int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
+	IsActive      bool                   `protobuf:"varint,4,opt,name=isActive,proto3" json:"isActive,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1432,6 +1432,13 @@ func (*AccessRoleModules) Descriptor() ([]byte, []int) {
 func (x *AccessRoleModules) GetRoleName() string {
 	if x != nil {
 		return x.RoleName
+	}
+	return ""
+}
+
+func (x *AccessRoleModules) GetModuleName() string {
+	if x != nil {
+		return x.ModuleName
 	}
 	return ""
 }
@@ -2198,11 +2205,14 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\vAccessToken\x18\x01 \x01(\tR\vAccessToken\x12\x1e\n" +
 	"\n" +
 	"moduleName\x18\x02 \x01(\tR\n" +
-	"moduleName\"a\n" +
+	"moduleName\"\x81\x01\n" +
 	"\x11AccessRoleModules\x12\x1a\n" +
-	"\broleName\x18\x01 \x01(\tR\broleName\x12\x14\n" +
-	"\x05level\x18\x02 \x01(\x05R\x05level\x12\x1a\n" +
-	"\bisActive\x18\x03 \x01(\bR\bisActive\"L\n" +
+	"\broleName\x18\x01 \x01(\tR\broleName\x12\x1e\n" +
+	"\n" +
+	"moduleName\x18\x02 \x01(\tR\n" +
+	"moduleName\x12\x14\n" +
+	"\x05level\x18\x03 \x01(\x05R\x05level\x12\x1a\n" +
+	"\bisActive\x18\x04 \x01(\bR\bisActive\"L\n" +
 	"\x19AccessRoleModulesResponse\x12/\n" +
 	"\x06access\x18\x01 \x03(\v2\x17.auth.AccessRoleModulesR\x06access\"|\n" +
 	"\vRoleRequest\x12 \n" +
