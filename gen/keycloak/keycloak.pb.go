@@ -728,13 +728,12 @@ type UserInfoResponse struct {
 	Email         string                 `protobuf:"bytes,8,opt,name=Email,proto3" json:"Email,omitempty"`
 	Attributes    map[string]string      `protobuf:"bytes,9,rep,name=Attributes,proto3" json:"Attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Access        []string               `protobuf:"bytes,10,rep,name=Access,proto3" json:"Access,omitempty"`
-	// ArrayOfStrings ClientRoles=11;
-	RealmRoles    []string `protobuf:"bytes,12,rep,name=RealmRoles,proto3" json:"RealmRoles,omitempty"`
-	Groups        []string `protobuf:"bytes,13,rep,name=Groups,proto3" json:"Groups,omitempty"`
-	Name          string   `protobuf:"bytes,14,opt,name=Name,proto3" json:"Name,omitempty"`
-	Scope         string   `protobuf:"bytes,15,opt,name=Scope,proto3" json:"Scope,omitempty"`
-	SessionState  string   `protobuf:"bytes,16,opt,name=SessionState,proto3" json:"SessionState,omitempty"`
-	ExpiresAt     int64    `protobuf:"varint,17,opt,name=ExpiresAt,proto3" json:"ExpiresAt,omitempty"`
+	RealmRoles    []string               `protobuf:"bytes,11,rep,name=RealmRoles,proto3" json:"RealmRoles,omitempty"`
+	Groups        []string               `protobuf:"bytes,12,rep,name=Groups,proto3" json:"Groups,omitempty"`
+	Name          string                 `protobuf:"bytes,13,opt,name=Name,proto3" json:"Name,omitempty"`
+	Scope         string                 `protobuf:"bytes,14,opt,name=Scope,proto3" json:"Scope,omitempty"`
+	SessionState  string                 `protobuf:"bytes,15,opt,name=SessionState,proto3" json:"SessionState,omitempty"`
+	ExpiresAt     int64                  `protobuf:"varint,16,opt,name=ExpiresAt,proto3" json:"ExpiresAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2143,13 +2142,13 @@ const file_keycloak_keycloak_proto_rawDesc = "" +
 	"\x06Access\x18\n" +
 	" \x03(\tR\x06Access\x12\x1e\n" +
 	"\n" +
-	"RealmRoles\x18\f \x03(\tR\n" +
+	"RealmRoles\x18\v \x03(\tR\n" +
 	"RealmRoles\x12\x16\n" +
-	"\x06Groups\x18\r \x03(\tR\x06Groups\x12\x12\n" +
-	"\x04Name\x18\x0e \x01(\tR\x04Name\x12\x14\n" +
-	"\x05Scope\x18\x0f \x01(\tR\x05Scope\x12\"\n" +
-	"\fSessionState\x18\x10 \x01(\tR\fSessionState\x12\x1c\n" +
-	"\tExpiresAt\x18\x11 \x01(\x03R\tExpiresAt\x1a=\n" +
+	"\x06Groups\x18\f \x03(\tR\x06Groups\x12\x12\n" +
+	"\x04Name\x18\r \x01(\tR\x04Name\x12\x14\n" +
+	"\x05Scope\x18\x0e \x01(\tR\x05Scope\x12\"\n" +
+	"\fSessionState\x18\x0f \x01(\tR\fSessionState\x12\x1c\n" +
+	"\tExpiresAt\x18\x10 \x01(\x03R\tExpiresAt\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa2\x01\n" +

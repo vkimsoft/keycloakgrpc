@@ -107,7 +107,7 @@ message ArrayOfStrings {
   RowOfStrings col = 1;
 }
 message UserInfoResponse{
-  string Id=1;
+    string Id=1;
 	string Realm_id=2;
 	string Username=3;
 	bool Enabled=4;
@@ -117,13 +117,12 @@ message UserInfoResponse{
 	string Email=8;
 	map<string, string> Attributes=9;
 	repeated string Access=10;
-	//ArrayOfStrings ClientRoles=11;
-	repeated string RealmRoles=12;
-	repeated string Groups=13;
-  string Name=14;
-	string Scope=15;
-  string SessionState=16;
-	int64 ExpiresAt=17;
+	repeated string RealmRoles=11;
+	repeated string Groups=12;
+    string Name=13;
+	string Scope=14;
+    string SessionState=15;
+	int64 ExpiresAt=16;
 	// 	Attributes                 map[string][]string `json:"attributes,omitempty"`
 	// DisableableCredentialTypes []interface{}       `json:"disableableCredentialTypes,omitempty"`
 	// RequiredActions            []string            `json:"requiredActions,omitempty"`
